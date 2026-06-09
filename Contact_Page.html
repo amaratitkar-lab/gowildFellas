@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#0d0d0a"/>
+<title>WildFellas — Contact Us</title>
+
+<style>
+
+/* ═══════════════════════════════════════════════
+   NEUZON FONT
+═══════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Neuzon';
+  src: url('assets/fonts/Neuzon-Regular.ttf') format('truetype');
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold:      #D4B896;
+  --gold-55:   rgba(212,184,150,0.55);
+  --gold-40:   rgba(212,184,150,0.40);
+  --gold-25:   rgba(212,184,150,0.25);
+  --gold-20:   rgba(212,184,150,0.20);
+  --gold-12:   rgba(212,184,150,0.12);
+  --gold-08:   rgba(212,184,150,0.08);
+  --gold-06:   rgba(212,184,150,0.06);
+  --bg:        #0d0d0a;
+  --bg-card:   #131210;
+  --bg-nav:    rgba(10,9,7,0.97);
+  --cream:     #f5ede0;
+  --cream-75:  rgba(245,237,224,0.75);
+  --cream-50:  rgba(245,237,224,0.50);
+  --cream-35:  rgba(245,237,224,0.35);
+  --ink:       #0d0d0a;
+
+  --nav-h:     72px;
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io:   cubic-bezier(0.4, 0, 0.2, 1);
+
+  --safe-t: env(safe-area-inset-top,    0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left,   0px);
+  --safe-r: env(safe-area-inset-right,  0px);
+}
+
+html { font-size: 16px; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Neuzon', sans-serif;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  min-height: 100dvh;
+}
+a   { text-decoration: none; color: inherit; }
+img { display: block; }
+button { cursor: pointer; background: none; border: none; font-family: inherit; }
+
+/* ═══════════════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════════════ */
+#wf-progress {
+  position: fixed; top: calc(var(--nav-h) + var(--safe-t)); left: 0;
+  height: 2px; width: 0%;
+  background: linear-gradient(to right, transparent, var(--gold) 40%, rgba(212,184,150,.3));
+  z-index: 99; pointer-events: none;
+  opacity: 0; transition: width .08s linear, opacity .4s;
+}
+#wf-progress.visible { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════ */
+#wf-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: calc(var(--nav-h) + var(--safe-t));
+  padding-top: var(--safe-t);
+  display: flex; align-items: center; justify-content: space-between;
+  padding-left:  max(52px, calc(52px + var(--safe-l)));
+  padding-right: max(52px, calc(52px + var(--safe-r)));
+  background: var(--bg-nav);
+  border-bottom: 1px solid var(--gold-12);
+  box-shadow: 0 8px 40px rgba(0,0,0,.65);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+  transition: box-shadow .55s var(--ease-out);
+}
+
+/* ── Logo ── */
+.wf-logo {
+  flex-shrink: 0; display: flex; align-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-logo img {
+  height: 44px; width: auto;
+  filter: invert(1) sepia(1) saturate(1.4) hue-rotate(5deg) brightness(.88);
+  transition: filter .35s, transform .35s var(--ease-out);
+}
+.wf-logo:hover img {
+  filter: invert(1) sepia(1) saturate(2.2) hue-rotate(5deg) brightness(.92);
+  transform: scale(1.04);
+}
+
+/* ── Desktop nav links ── */
+.wf-nav-desktop { display: flex; align-items: center; gap: 4px; }
+.wf-nav-link {
+  position: relative;
+  font-size: 12.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(212,184,150,.5);
+  padding: 8px 18px;
+  transition: color .3s; white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-nav-link::after {
+  content: ''; position: absolute;
+  bottom: 3px; left: 18px; right: 18px; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform .4s var(--ease-out);
+}
+.wf-nav-link.active::before {
+  content: ''; position: absolute;
+  top: 5px; left: 50%; transform: translateX(-50%);
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--gold); opacity: .7;
+}
+.wf-nav-link:hover,
+.wf-nav-link.active { color: var(--gold); }
+.wf-nav-link:hover::after,
+.wf-nav-link.active::after { transform: scaleX(1); }
+
+/* ── Right cluster ── */
+.wf-nav-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+.wf-nav-divider { width: 1px; height: 22px; background: var(--gold-20); }
+.wf-nav-cta {
+  position: relative; overflow: hidden;
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); padding: 10px 26px;
+  border: 1px solid rgba(212,184,150,.3);
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: color .35s, border-color .35s;
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-nav-cta::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: translateX(-101%);
+  transition: transform .45s var(--ease-out); z-index: 0;
+}
+.wf-nav-cta > * { position: relative; z-index: 1; }
+.wf-nav-cta svg { transition: transform .35s var(--ease-out); }
+.wf-nav-cta:hover { color: var(--ink); border-color: var(--gold); }
+.wf-nav-cta:hover::before { transform: translateX(0); }
+.wf-nav-cta:hover svg { transform: translateX(4px); }
+
+/* ── Hamburger ── */
+.wf-hamburger {
+  display: none; flex-direction: column;
+  justify-content: center; align-items: flex-end;
+  gap: 5px; padding: 10px;
+  width: 44px; height: 44px; min-width: 44px; min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-hamburger span {
+  display: block; height: 1.5px; background: var(--gold); border-radius: 1px;
+  transition: transform .38s var(--ease-out), opacity .3s, width .35s var(--ease-out);
+}
+.wf-hamburger span:nth-child(1) { width: 24px; }
+.wf-hamburger span:nth-child(2) { width: 16px; }
+.wf-hamburger span:nth-child(3) { width: 20px; }
+.wf-hamburger:hover span { width: 24px !important; }
+.wf-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg);  width: 24px; }
+.wf-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.wf-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 24px; }
+
+/* ── Mobile fullscreen drawer ── */
+#wf-mobile-menu {
+  position: fixed; inset: 0; z-index: 98;
+  background: rgba(10,9,7,.99);
+  backdrop-filter: blur(32px) saturate(150%);
+  -webkit-backdrop-filter: blur(32px) saturate(150%);
+  display: flex; flex-direction: column; justify-content: center;
+  padding:
+    calc(var(--nav-h) + var(--safe-t) + 40px)
+    max(40px, calc(40px + var(--safe-r)))
+    max(40px, calc(40px + var(--safe-b)))
+    max(40px, calc(40px + var(--safe-l)));
+  pointer-events: none; opacity: 0;
+  transition: opacity .45s var(--ease-out);
+}
+#wf-mobile-menu.open { pointer-events: all; opacity: 1; }
+.wf-mobile-nav { display: flex; flex-direction: column; }
+.wf-mobile-link {
+  font-size: small; letter-spacing: .04em;
+  color: rgba(212,184,150,.2);
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(212,184,150,.06);
+  display: flex; align-items: center; justify-content: space-between;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(22px); opacity: 0;
+  transition: color .3s, transform .55s var(--ease-out), opacity .55s var(--ease-out);
+}
+#wf-mobile-menu.open .wf-mobile-link              { transform: translateY(0); opacity: 1; }
+#wf-mobile-menu.open .wf-mobile-link:nth-child(1) { transition-delay: .07s; }
+#wf-mobile-menu.open .wf-mobile-link:nth-child(2) { transition-delay: .13s; }
+#wf-mobile-menu.open .wf-mobile-link:nth-child(3) { transition-delay: .19s; }
+#wf-mobile-menu.open .wf-mobile-link:nth-child(4) { transition-delay: .25s; }
+.wf-mobile-link:hover, .wf-mobile-link.active { color: var(--gold); }
+.wf-mobile-num {
+  font-size: 11px; letter-spacing: .2em;
+  color: rgba(212,184,150,.18); align-self: flex-start; margin-top: 8px;
+}
+.wf-mobile-cta-wrap {
+  margin-top: 36px; transform: translateY(20px); opacity: 0;
+  transition: transform .55s var(--ease-out) .31s, opacity .55s var(--ease-out) .31s;
+}
+#wf-mobile-menu.open .wf-mobile-cta-wrap { transform: translateY(0); opacity: 1; }
+.wf-mobile-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); padding: 14px 28px;
+  border: 1px solid rgba(212,184,150,.3);
+  transition: background .3s, border-color .3s;
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-mobile-cta:active { background: var(--gold-06); }
+.wf-mobile-footer {
+  position: absolute;
+  bottom: max(28px, calc(28px + var(--safe-b)));
+  left:  max(40px, calc(40px + var(--safe-l)));
+  right: max(40px, calc(40px + var(--safe-r)));
+  display: flex; justify-content: space-between;
+  opacity: 0; transition: opacity .55s var(--ease-out) .37s;
+}
+#wf-mobile-menu.open .wf-mobile-footer { opacity: 1; }
+.wf-mobile-footer-text {
+  font-size: 10px; letter-spacing: .24em;
+  text-transform: uppercase; color: rgba(212,184,150,.18);
+}
+
+/* ═══════════════════════════════════════════════
+   CONTACT PAGE — MAIN
+═══════════════════════════════════════════════ */
+.contact-main {
+  padding-top: calc(var(--nav-h) + var(--safe-t));
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Ambient background glow ── */
+.contact-main::before {
+  content: '';
+  position: absolute;
+  top: 20%; left: -10%;
+  width: 55vw; height: 55vw;
+  background: radial-gradient(ellipse, rgba(212,184,150,.045) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+.contact-main::after {
+  content: '';
+  position: absolute;
+  bottom: 10%; right: -5%;
+  width: 40vw; height: 40vw;
+  background: radial-gradient(ellipse, rgba(212,184,150,.03) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── Page header ── */
+.contact-header {
+  position: relative; z-index: 1;
+  padding: clamp(52px,7vh,88px) clamp(24px,5.5vw,72px) clamp(40px,5vh,64px);
+  border-bottom: 1px solid rgba(212,184,150,.08);
+}
+.contact-header-inner {
+  max-width: 780px;
+}
+.contact-eyebrow {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; letter-spacing: .36em; text-transform: uppercase;
+  color: rgba(212,184,150,.42);
+  margin-bottom: 20px;
+  opacity: 0; transform: translateY(12px);
+  animation: cFadeUp .7s var(--ease-out) .1s forwards;
+}
+.contact-eyebrow-dash { display: inline-block; width: 26px; height: 1px; background: rgba(212,184,150,.4); }
+.contact-h1 {
+  font-size: clamp(38px, 6vw, 72px);
+  letter-spacing: -.03em; color: var(--cream); line-height: 1.0;
+  margin-bottom: 20px;
+  opacity: 0; transform: translateY(18px);
+  animation: cFadeUp .8s var(--ease-out) .22s forwards;
+}
+.contact-h1 em { font-style: italic; color: var(--gold); }
+.contact-sub {
+  font-size: clamp(13px,1.5vw,16px); color: rgba(245,237,224,.42);
+  line-height: 1.85; max-width: 480px;
+  opacity: 0; transform: translateY(14px);
+  animation: cFadeUp .75s var(--ease-out) .36s forwards;
+}
+
+/* ── Two-column layout ── */
+.contact-body {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.45fr;
+  gap: 0;
+  min-height: calc(100dvh - var(--nav-h) - 260px);
+}
+
+/* ────────────────────────────
+   LEFT PANEL — info
+──────────────────────────── */
+.contact-info {
+  padding: clamp(40px,5vh,64px) clamp(24px,5.5vw,64px);
+  border-right: 1px solid rgba(212,184,150,.08);
+  display: flex; flex-direction: column; gap: 48px;
+}
+
+/* ── Info group ── */
+.info-group { display: flex; flex-direction: column; gap: 24px; }
+.info-group-label {
+  font-size: 9px; letter-spacing: .38em; text-transform: uppercase;
+  color: rgba(212,184,150,.35); font-style: italic;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212,184,150,.08);
+}
+
+/* ── Contact item ── */
+.contact-item {
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.contact-item-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border: 1px solid rgba(212,184,150,.2);
+  background: rgba(212,184,150,.04);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .3s, background .3s;
+}
+.contact-item:hover .contact-item-icon {
+  border-color: rgba(212,184,150,.45);
+  background: rgba(212,184,150,.08);
+}
+.contact-item-icon svg { display: block; }
+.contact-item-text { display: flex; flex-direction: column; gap: 3px; }
+.contact-item-label {
+  font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
+  color: rgba(212,184,150,.35); font-style: italic;
+}
+.contact-item-value {
+  font-size: 14px; color: rgba(245,237,224,.7);
+  transition: color .3s; letter-spacing: .02em;
+}
+a.contact-item:hover .contact-item-value { color: var(--gold); }
+
+/* ── WhatsApp CTA ── */
+.wa-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); padding: 13px 24px;
+  border: 1px solid rgba(212,184,150,.28);
+  background: rgba(212,184,150,.04);
+  position: relative; overflow: hidden;
+  transition: color .35s, border-color .35s;
+  -webkit-tap-highlight-color: transparent;
+  align-self: flex-start;
+}
+.wa-btn::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: translateX(-101%); transition: transform .45s var(--ease-out); z-index: 0;
+}
+.wa-btn > * { position: relative; z-index: 1; }
+.wa-btn svg { transition: transform .3s var(--ease-out); }
+.wa-btn:hover { color: var(--ink); border-color: var(--gold); }
+.wa-btn:hover::before { transform: translateX(0); }
+.wa-btn:hover svg { transform: translateX(3px); }
+
+/* ── Subtle vertical rule decoration ── */
+.info-rule {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(212,184,150,.2), transparent);
+  margin: 4px 0 4px 17px;
+}
+
+/* ────────────────────────────
+   RIGHT PANEL — form
+──────────────────────────── */
+.contact-form-wrap {
+  padding: clamp(40px,5vh,64px) clamp(24px,5.5vw,64px);
+  display: flex; flex-direction: column;
+}
+.form-heading {
+  font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+  color: rgba(212,184,150,.35); font-style: italic;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(212,184,150,.08);
+}
+
+/* ── Form ── */
+.contact-form {
+  display: flex; flex-direction: column; gap: 20px; flex: 1;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-field { display: flex; flex-direction: column; gap: 7px; }
+.form-label {
+  font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+  color: rgba(212,184,150,.38); font-style: italic;
+}
+.form-input,
+.form-textarea {
+  background: rgba(212,184,150,.04);
+  border: 1px solid rgba(212,184,150,.16);
+  color: var(--cream);
+  font-family: 'Neuzon', sans-serif;
+  font-size: 14px; letter-spacing: .02em;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color .3s, background .3s;
+  width: 100%;
+  -webkit-appearance: none;
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(245,237,224,.2);
+  font-style: italic;
+}
+.form-input:focus,
+.form-textarea:focus {
+  border-color: rgba(212,184,150,.55);
+  background: rgba(212,184,150,.06);
+}
+.form-textarea { resize: none; min-height: 120px; line-height: 1.7; }
+
+/* Interest selector */
+.form-interest-label {
+  font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+  color: rgba(212,184,150,.38); font-style: italic;
+  margin-bottom: 7px;
+}
+.interest-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.interest-chip {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(212,184,150,.4);
+  padding: 7px 16px;
+  border: 1px solid rgba(212,184,150,.16);
+  background: transparent;
+  cursor: pointer;
+  transition: color .28s, border-color .28s, background .28s;
+  -webkit-tap-highlight-color: transparent;
+}
+.interest-chip:hover { color: rgba(212,184,150,.75); border-color: rgba(212,184,150,.38); }
+.interest-chip.selected {
+  color: var(--gold);
+  border-color: rgba(212,184,150,.55);
+  background: rgba(212,184,150,.07);
+}
+
+/* Divider */
+.form-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(212,184,150,.14), transparent);
+  margin: 4px 0;
+}
+
+/* Submit */
+.form-submit {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  font-family: 'Neuzon', sans-serif;
+  font-size: 12px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--gold); padding: 16px 32px;
+  border: 1px solid rgba(212,184,150,.32);
+  background: rgba(212,184,150,.05);
+  cursor: pointer;
+  transition: color .35s, border-color .35s;
+  align-self: flex-start;
+  min-width: 200px;
+  -webkit-tap-highlight-color: transparent;
+}
+.form-submit::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: translateX(-101%); transition: transform .45s var(--ease-out); z-index: 0;
+}
+.form-submit > * { position: relative; z-index: 1; }
+.form-submit svg { transition: transform .35s var(--ease-out); }
+.form-submit:hover { color: var(--ink); border-color: var(--gold); }
+.form-submit:hover::before { transform: translateX(0); }
+.form-submit:hover svg { transform: translateX(4px); }
+
+/* Success state */
+.form-submit.sent {
+  color: var(--gold); border-color: rgba(212,184,150,.4);
+  background: rgba(212,184,150,.06); pointer-events: none;
+}
+.form-submit.sent::before { transform: translateX(0); background: rgba(212,184,150,.08); }
+
+/* ── Scroll reveal ── */
+.c-reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .65s var(--ease-out), transform .65s var(--ease-out);
+}
+.c-reveal.visible { opacity: 1; transform: translateY(0); }
+.c-d1 { transition-delay: .06s; }
+.c-d2 { transition-delay: .12s; }
+.c-d3 { transition-delay: .18s; }
+.c-d4 { transition-delay: .24s; }
+
+/* ── Animations ── */
+@keyframes cFadeUp { to { opacity: 1; transform: translateY(0); } }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.wf-footer {
+  position: relative;
+  background: var(--bg);
+  border-top: 1px solid rgba(212,184,150,.14);
+  z-index: 1;
+}
+.footer-main {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px 32px;
+  padding: clamp(28px,4vh,44px) clamp(24px,6vw,96px);
+  border-bottom: 1px solid rgba(212,184,150,.07);
+}
+.footer-wordmark { display: flex; flex-direction: column; gap: 7px; flex-shrink: 0; }
+.footer-wordmark-logo {
+  height: 38px; width: auto;
+  filter: invert(1) sepia(1) saturate(1.4) hue-rotate(5deg) brightness(.88);
+  display: block; transition: filter .35s, opacity .35s;
+}
+.footer-wordmark-logo:hover {
+  filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(.92); opacity: .85;
+}
+.footer-wordmark-tag {
+  font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(212,184,150,.28);
+}
+.footer-nav { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+.footer-nav-link {
+  font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(245,237,224,.38);
+  padding: 4px clamp(12px,2vw,22px);
+  border-right: 1px solid rgba(212,184,150,.1);
+  transition: color .3s; -webkit-tap-highlight-color: transparent; white-space: nowrap;
+}
+.footer-nav-link:first-child { padding-left: 0; }
+.footer-nav-link:last-child  { border-right: none; padding-right: 0; }
+.footer-nav-link:hover       { color: var(--gold); }
+.footer-nav-link.active      { color: var(--gold); }
+.footer-contact-cluster { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.footer-contact-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11.5px; letter-spacing: .04em;
+  color: rgba(245,237,224,.42);
+  transition: color .3s; -webkit-tap-highlight-color: transparent; white-space: nowrap;
+}
+.footer-contact-chip svg { flex-shrink: 0; opacity: .55; transition: opacity .3s; }
+.footer-contact-chip:hover { color: var(--gold); }
+.footer-contact-chip:hover svg { opacity: 1; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+  padding: clamp(12px,1.8vh,18px) clamp(24px,6vw,96px)
+           max(clamp(12px,1.8vh,18px), calc(clamp(12px,1.8vh,18px) + var(--safe-b)));
+}
+.footer-bottom-copy { font-size: 10px; letter-spacing: .14em; font-style: italic; color: rgba(212,184,150,.2); }
+.footer-back-top {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(212,184,150,.25);
+  cursor: pointer; background: none; border: none;
+  transition: color .3s; -webkit-tap-highlight-color: transparent;
+}
+.footer-back-top:hover { color: var(--gold); }
+.footer-back-top svg { transition: transform .35s var(--ease-out); }
+.footer-back-top:hover svg { transform: translateY(-3px); }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — Tablet ≤ 900px
+═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --nav-h: 68px; }
+  #wf-nav {
+    padding-left:  max(24px, calc(24px + var(--safe-l)));
+    padding-right: max(24px, calc(24px + var(--safe-r)));
+  }
+  .wf-nav-desktop, .wf-nav-right { display: none !important; }
+  .wf-hamburger { display: flex; }
+  .wf-logo img  { height: 38px; }
+
+  .contact-body { grid-template-columns: 1fr; }
+  .contact-info { border-right: none; border-bottom: 1px solid rgba(212,184,150,.08); }
+  .form-row { grid-template-columns: 1fr 1fr; }
+
+  .footer-main { gap: 20px 24px; }
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — Mobile ≤ 600px
+═══════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  :root { --nav-h: 62px; }
+  #wf-nav {
+    padding-left:  max(18px, calc(18px + var(--safe-l)));
+    padding-right: max(18px, calc(18px + var(--safe-r)));
+  }
+  .wf-logo img { height: 32px; }
+
+  .contact-header { padding: 36px max(20px, calc(18px + var(--safe-l))) 28px; }
+  .contact-info { padding: 32px max(20px, calc(18px + var(--safe-l))); }
+  .contact-form-wrap { padding: 32px max(20px, calc(18px + var(--safe-l))); }
+  .form-row { grid-template-columns: 1fr; }
+
+  .footer-main {
+    flex-direction: column; align-items: flex-start;
+    padding: 28px max(20px, calc(18px + var(--safe-l))); gap: 22px;
+  }
+  .footer-nav { flex-wrap: wrap; }
+  .footer-nav-link { font-size: 11px; letter-spacing: .12em; padding: 4px 14px; }
+  .footer-nav-link:first-child { padding-left: 0; }
+  .footer-contact-cluster { gap: 14px; }
+  .footer-bottom { padding: 12px max(20px, calc(18px + var(--safe-l))); }
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — iPhone SE ≤ 374px
+═══════════════════════════════════════════════ */
+@media (max-width: 374px) {
+  :root { --nav-h: 58px; }
+  .wf-logo img  { height: 28px; }
+  .wf-mobile-link { font-size: clamp(26px, 9vw, 38px); }
+  .footer-nav-link { font-size: 10.5px; padding: 4px 10px; }
+  .footer-wordmark-logo { height: 30px; }
+}
+
+/* Desktop nav always visible */
+@media (min-width: 901px) { #wf-mobile-menu { display: none !important; } }
+
+</style>
+</head>
+<body>
+
+<div id="wf-progress"></div>
+
+<!-- ══════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════ -->
+<header id="wf-nav">
+
+  <a class="wf-logo" href="Home_Page.html" aria-label="WildFellas — Go to homepage">
+    <img src="assets/images/logo.jpeg" alt="WildFellas"/>
+  </a>
+
+  <nav class="wf-nav-desktop" aria-label="Primary navigation">
+    <a class="wf-nav-link"        href="Home_Page.html">Home</a>
+    <a class="wf-nav-link"        href="About_Page.html">About Us</a>
+    <a class="wf-nav-link"        href="Tours_Page.html">Tours</a>
+    <a class="wf-nav-link active" href="Contact_Page.html">Contact Us</a>
+  </nav>
+
+  <div class="wf-nav-right">
+    <div class="wf-nav-divider" aria-hidden="true"></div>
+    <a class="wf-nav-cta" href="#contact-form" aria-label="Book a safari">
+      <span>Book a Safari</span>
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <button class="wf-hamburger" id="wf-hamburger"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="wf-mobile-menu"
+          onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- Mobile fullscreen drawer -->
+<nav id="wf-mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="wf-mobile-nav">
+    <a class="wf-mobile-link"        href="Home_Page.html">Home</a>
+    <a class="wf-mobile-link"        href="About_Page.html">About Us</a>
+    <a class="wf-mobile-link"        href="Tours_Page.html">Tours</a>
+    <a class="wf-mobile-link active" href="Contact_Page.html">Contact Us</a>
+  </div>
+  <div class="wf-mobile-cta-wrap">
+    <a class="wf-mobile-cta" href="#contact-form" aria-label="Book a safari" onclick="toggleMobileMenu()">
+      Book a Safari
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+  <div class="wf-mobile-footer" aria-hidden="true">
+    <span class="wf-mobile-footer-text">© 2026 WildFellas</span>
+    <span class="wf-mobile-footer-text">Pune, India</span>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     CONTACT MAIN
+══════════════════════════════════════════════ -->
+<main class="contact-main" id="contact-form">
+
+  <!-- ── Page header ── -->
+  <div class="contact-header">
+    <div class="contact-header-inner">
+      <p class="contact-eyebrow">
+        <span class="contact-eyebrow-dash" aria-hidden="true"></span>
+        Get In Touch
+      </p>
+      <h1 class="contact-h1">
+        Let's Start Your
+        <em>Journey.</em>
+      </h1>
+      <p class="contact-sub">
+        Whether you're planning your first expedition or returning for a
+        new wilderness — we're here to guide the way.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Two-column body ── -->
+  <div class="contact-body">
+
+    <!-- ─── LEFT: Contact info ─── -->
+    <aside class="contact-info">
+
+      <!-- Direct contact -->
+      <div class="info-group c-reveal c-d1">
+        <p class="info-group-label">Direct Contact</p>
+
+        <a class="contact-item" href="mailto:wildfellas22@gmail.com" aria-label="Email us">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Email</span>
+            <span class="contact-item-value">wildfellas22@gmail.com</span>
+          </div>
+        </a>
+
+        <div class="info-rule" aria-hidden="true"></div>
+
+        <a class="contact-item" href="tel:+919970004812" aria-label="Call us">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.1 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Phone</span>
+            <span class="contact-item-value">+91 99700 04812</span>
+          </div>
+        </a>
+
+        <div class="info-rule" aria-hidden="true"></div>
+
+        <a class="contact-item" href="https://instagram.com/WildFellasExpeditions"
+           target="_blank" rel="noopener" aria-label="Instagram">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="var(--gold)" stroke="none"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Instagram</span>
+            <span class="contact-item-value">@WildFellasExpeditions</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Location -->
+      <div class="info-group c-reveal c-d2">
+        <p class="info-group-label">Based In</p>
+        <div class="contact-item">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Location</span>
+            <span class="contact-item-value">Pune, Maharashtra, India</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="c-reveal c-d3">
+        <a class="wa-btn" href="https://wa.me/919970004812"
+           target="_blank" rel="noopener" aria-label="Start WhatsApp chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          <span>WhatsApp Us</span>
+          <svg viewBox="0 0 16 16" fill="none" width="10" height="10" aria-hidden="true">
+            <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- ─── RIGHT: Form ─── -->
+    <section class="contact-form-wrap c-reveal c-d1" aria-label="Inquiry form">
+
+      <p class="form-heading">Send an Inquiry</p>
+
+      <form class="contact-form" id="inquiry-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <input type="hidden" name="access_key"
+         value="3a716d8d-0d5c-40cd-80cf-90706bab28d4">
+
+<input type="hidden" name="subject"
+       value="🦁 New WildFellas Safari Inquiry">
+
+  <input type="hidden" name="from_name"
+         value="WildFellas Website">
+
+        <!-- Name + Phone -->
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="f-name">Full Name</label>
+            <input class="form-input" type="text" id="f-name" name="name"
+                   placeholder="Your name" autocomplete="name" required/>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f-phone">Phone</label>
+            <input class="form-input" type="tel" id="f-phone" name="phone"
+                   placeholder="+91" autocomplete="tel"/>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-field">
+          <label class="form-label" for="f-email">Email</label>
+          <input class="form-input" type="email" id="f-email" name="email"
+                 placeholder="explorer@wilderness.com" autocomplete="email" required/>
+        </div>
+
+        <!-- Interest -->
+        <div class="form-field">
+          <p class="form-label form-interest-label">I'm interested in</p>
+          <div class="interest-chips" role="group" aria-label="Trip type">
+            <button type="button" class="interest-chip" data-value="Tiger Safaris">Tiger Safaris</button>
+            <button type="button" class="interest-chip" data-value="Birdwatching">Birdwatching</button>
+            <button type="button" class="interest-chip" data-value="Herping">Herping</button>
+            <button type="button" class="interest-chip" data-value="Custom Trip">Custom Trip</button>
+          </div>
+          <input type="hidden" name="interest" id="f-interest" value=""/>
+        </div>
+
+        <!-- Message -->
+        <div class="form-field">
+          <label class="form-label" for="f-message">Message</label>
+          <textarea class="form-textarea" id="f-message" name="message"
+                    placeholder="Tell us about your dream expedition — destination, dates, group size..."
+                    rows="5" required></textarea>
+        </div>
+
+        <div class="form-divider" aria-hidden="true"></div>
+
+        <!-- Submit -->
+        <button class="form-submit" type="submit" id="form-submit">
+          <span id="submit-label">Send Inquiry</span>
+          <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true" id="submit-icon">
+            <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+      </form>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer class="wf-footer" role="contentinfo">
+  <div class="footer-main">
+    <div class="footer-wordmark">
+      <a href="Home_Page.html" aria-label="WildFellas — Home">
+        <img class="footer-wordmark-logo" src="assets/images/logo.jpeg" alt="WildFellas"/>
+      </a>
+      <span class="footer-wordmark-tag">Est. 2026 · Pune, India</span>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a class="footer-nav-link"        href="Home_Page.html">Home</a>
+      <a class="footer-nav-link"        href="About_Page.html">About Us</a>
+      <a class="footer-nav-link"        href="Tours_Page.html">Tours</a>
+      <a class="footer-nav-link active" href="Contact_Page.html">Contact Us</a>
+    </nav>
+    <div class="footer-contact-cluster">
+      <a class="footer-contact-chip" href="mailto:wildfellas22@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        wildfellas22@gmail.com
+      </a>
+      <a class="footer-contact-chip" href="tel:+919970004812">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.1 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
+        </svg>
+        +91 99700 04812
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-bottom-copy">© 2026 WildFellas. All rights reserved.</p>
+    <button class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+            aria-label="Back to top">
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+        <path d="M8 13V3M4 7L8 3L12 7" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back to top
+    </button>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
+<script>
+/* ── Scroll: progress bar ── */
+const progressEl = document.getElementById('wf-progress');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const sy   = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const pct  = docH > 0 ? (sy / docH) * 100 : 0;
+      progressEl.style.width = pct + '%';
+      progressEl.classList.toggle('visible', sy > 100);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+/* ── Scroll reveal ── */
+const revealEls = document.querySelectorAll('.c-reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ── Interest chips → write to hidden input ── */
+const interestInput = document.getElementById('f-interest');
+document.querySelectorAll('.interest-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('selected');
+    const selected = [...document.querySelectorAll('.interest-chip.selected')]
+                       .map(c => c.dataset.value).join(', ');
+    interestInput.value = selected;
+  });
+});
+
+/* ── Form submits to PHP — no JS intercept needed ── */
+const form = document.getElementById('inquiry-form');
+
+/* ── Mobile menu ── */
+const menuEl   = document.getElementById('wf-mobile-menu');
+const burgerEl = document.getElementById('wf-hamburger');
+
+function toggleMobileMenu() {
+  const open = !menuEl.classList.contains('open');
+  menuEl.classList.toggle('open', open);
+  burgerEl.classList.toggle('open', open);
+  burgerEl.setAttribute('aria-expanded', String(open));
+  menuEl.setAttribute('aria-hidden', String(!open));
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
+menuEl.querySelectorAll('.wf-mobile-link, .wf-mobile-cta').forEach(l => {
+  l.addEventListener('click', () => {
+    menuEl.classList.remove('open');
+    burgerEl.classList.remove('open');
+    burgerEl.setAttribute('aria-expanded', 'false');
+    menuEl.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuEl.classList.contains('open')) {
+    toggleMobileMenu(); burgerEl.focus();
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900 && menuEl.classList.contains('open')) toggleMobileMenu();
+}, { passive: true });
+
+/* ── Show success / error toast from PHP redirect ── */
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+  if (!status) return;
+
+  const toast = document.createElement('div');
+  const ok    = status === 'success';
+  toast.textContent = ok
+    ? '✓  Inquiry sent — we\'ll be in touch soon!'
+    : '✗  Something went wrong. Please try again.';
+  Object.assign(toast.style, {
+    position:     'fixed',
+    bottom:       'max(28px, calc(28px + env(safe-area-inset-bottom)))',
+    left:         '50%',
+    transform:    'translateX(-50%) translateY(12px)',
+    background:   ok ? 'rgba(13,13,10,.96)' : 'rgba(30,10,10,.96)',
+    border:       ok ? '1px solid rgba(212,184,150,.45)' : '1px solid rgba(200,80,80,.4)',
+    color:        ok ? '#D4B896' : 'rgba(245,160,140,0.9)',
+    fontFamily:   'Neuzon, sans-serif',
+    fontSize:     '12px',
+    letterSpacing:'.14em',
+    padding:      '12px 28px',
+    zIndex:       '9999',
+    whiteSpace:   'nowrap',
+    opacity:      '0',
+    transition:   'opacity .4s ease, transform .4s ease',
+    backdropFilter:'blur(12px)',
+  });
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    toast.style.opacity   = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  }));
+  setTimeout(() => {
+    toast.style.opacity   = '0';
+    toast.style.transform = 'translateX(-50%) translateY(8px)';
+    setTimeout(() => toast.remove(), 500);
+  }, 4000);
+
+  // Clean URL
+  history.replaceState(null, '', window.location.pathname);
+})();
+</script>
+
+</body>
+</html>
