@@ -659,13 +659,13 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
 ══════════════════════════════════════════════ -->
 <header id="wf-nav">
 
-  <a class="wf-logo" href="Home_Page.html" aria-label="WildFellas — Go to homepage">
+  <a class="wf-logo" href="index.html" aria-label="WildFellas — Go to homepage">
     <img src="assets/images/logo.jpeg" alt="WildFellas"/>
   </a>
 
   <nav class="wf-nav-desktop" aria-label="Primary navigation">
-    <a class="wf-nav-link"        href="Home_Page.html">Home</a>
-    <a class="wf-nav-link"        href="About_Page.html">About Us</a>
+    <a class="wf-nav-link"        href="index.html">Home</a>
+    <a class="wf-nav-link"        href="about.html">About Us</a>
     <a class="wf-nav-link"        href="Tours_Page.html">Tours</a>
     <a class="wf-nav-link active" href="Contact_Page.html">Contact Us</a>
   </nav>
@@ -694,8 +694,8 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
 <!-- Mobile fullscreen drawer -->
 <nav id="wf-mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
   <div class="wf-mobile-nav">
-    <a class="wf-mobile-link"        href="Home_Page.html">Home</a>
-    <a class="wf-mobile-link"        href="About_Page.html">About Us</a>
+    <a class="wf-mobile-link"        href="index.html">Home</a>
+    <a class="wf-mobile-link"        href="about.html">About Us</a>
     <a class="wf-mobile-link"        href="Tours_Page.html">Tours</a>
     <a class="wf-mobile-link active" href="Contact_Page.html">Contact Us</a>
   </div>
@@ -838,7 +838,7 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
 
       <p class="form-heading">Send an Inquiry</p>
 
-      <form class="contact-form" id="inquiry-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <form class="contact-form" id="inquiry-form" novalidate>
         <input type="hidden" name="access_key"
          value="3a716d8d-0d5c-40cd-80cf-90706bab28d4">
 
@@ -915,14 +915,14 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
 <footer class="wf-footer" role="contentinfo">
   <div class="footer-main">
     <div class="footer-wordmark">
-      <a href="Home_Page.html" aria-label="WildFellas — Home">
+      <a href="index.html" aria-label="WildFellas — Home">
         <img class="footer-wordmark-logo" src="assets/images/logo.jpeg" alt="WildFellas"/>
       </a>
       <span class="footer-wordmark-tag">Est. 2026 · Pune, India</span>
     </div>
     <nav class="footer-nav" aria-label="Footer navigation">
-      <a class="footer-nav-link"        href="Home_Page.html">Home</a>
-      <a class="footer-nav-link"        href="About_Page.html">About Us</a>
+      <a class="footer-nav-link"        href="index.html">Home</a>
+      <a class="footer-nav-link"        href="about.html">About Us</a>
       <a class="footer-nav-link"        href="Tours_Page.html">Tours</a>
       <a class="footer-nav-link active" href="Contact_Page.html">Contact Us</a>
     </nav>
@@ -1002,8 +1002,92 @@ document.querySelectorAll('.interest-chip').forEach(chip => {
   });
 });
 
-/* ── Form submits to PHP — no JS intercept needed ── */
-const form = document.getElementById('inquiry-form');
+/* ── Form → Web3Forms (works on GitHub Pages, no server needed) ── */
+const form       = document.getElementById('inquiry-form');
+const submitBtn  = document.getElementById('form-submit');
+const submitLbl  = document.getElementById('submit-label');
+const submitIcon = document.getElementById('submit-icon');
+
+function showToast(ok) {
+  const toast = document.createElement('div');
+  toast.textContent = ok
+    ? '✓  Inquiry sent — we\'ll be in touch soon!'
+    : '✗  Something went wrong. Please try again.';
+  Object.assign(toast.style, {
+    position:      'fixed',
+    bottom:        'max(28px, calc(28px + env(safe-area-inset-bottom)))',
+    left:          '50%',
+    transform:     'translateX(-50%) translateY(12px)',
+    background:    ok ? 'rgba(13,13,10,.96)' : 'rgba(30,10,10,.96)',
+    border:        ok ? '1px solid rgba(212,184,150,.45)' : '1px solid rgba(200,80,80,.4)',
+    color:         ok ? '#D4B896' : 'rgba(245,160,140,0.9)',
+    fontFamily:    'Neuzon, sans-serif',
+    fontSize:      '12px',
+    letterSpacing: '.14em',
+    padding:       '12px 28px',
+    zIndex:        '9999',
+    whiteSpace:    'nowrap',
+    opacity:       '0',
+    transition:    'opacity .4s ease, transform .4s ease',
+    backdropFilter:'blur(12px)',
+  });
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    toast.style.opacity   = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  }));
+  setTimeout(() => {
+    toast.style.opacity   = '0';
+    toast.style.transform = 'translateX(-50%) translateY(8px)';
+    setTimeout(() => toast.remove(), 500);
+  }, 4500);
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  /* Basic client-side validation */
+  const name    = form.querySelector('#f-name').value.trim();
+  const email   = form.querySelector('#f-email').value.trim();
+  const message = form.querySelector('#f-message').value.trim();
+  if (!name || !email || !message) {
+    showToast(false); return;
+  }
+
+  /* Loading state */
+  submitBtn.disabled  = true;
+  submitLbl.textContent = 'Sending…';
+  submitIcon.style.opacity = '0';
+
+  try {
+    const data = new FormData(form);
+    const res  = await fetch('https://api.web3forms.com/submit', {
+      method:  'POST',
+      headers: { 'Accept': 'application/json' },
+      body:    data,
+    });
+    const json = await res.json();
+
+    if (res.ok && json.success) {
+      showToast(true);
+      form.reset();
+      document.querySelectorAll('.interest-chip').forEach(c => c.classList.remove('selected'));
+      document.getElementById('f-interest').value = '';
+      submitBtn.classList.add('sent');
+      submitLbl.textContent = 'Sent ✓';
+    } else {
+      showToast(false);
+      submitLbl.textContent = 'Send Inquiry';
+      submitIcon.style.opacity = '1';
+      submitBtn.disabled = false;
+    }
+  } catch (err) {
+    showToast(false);
+    submitLbl.textContent = 'Send Inquiry';
+    submitIcon.style.opacity = '1';
+    submitBtn.disabled = false;
+  }
+});
 
 /* ── Mobile menu ── */
 const menuEl   = document.getElementById('wf-mobile-menu');
@@ -1038,49 +1122,7 @@ window.addEventListener('resize', () => {
   if (window.innerWidth > 900 && menuEl.classList.contains('open')) toggleMobileMenu();
 }, { passive: true });
 
-/* ── Show success / error toast from PHP redirect ── */
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const status = params.get('status');
-  if (!status) return;
 
-  const toast = document.createElement('div');
-  const ok    = status === 'success';
-  toast.textContent = ok
-    ? '✓  Inquiry sent — we\'ll be in touch soon!'
-    : '✗  Something went wrong. Please try again.';
-  Object.assign(toast.style, {
-    position:     'fixed',
-    bottom:       'max(28px, calc(28px + env(safe-area-inset-bottom)))',
-    left:         '50%',
-    transform:    'translateX(-50%) translateY(12px)',
-    background:   ok ? 'rgba(13,13,10,.96)' : 'rgba(30,10,10,.96)',
-    border:       ok ? '1px solid rgba(212,184,150,.45)' : '1px solid rgba(200,80,80,.4)',
-    color:        ok ? '#D4B896' : 'rgba(245,160,140,0.9)',
-    fontFamily:   'Neuzon, sans-serif',
-    fontSize:     '12px',
-    letterSpacing:'.14em',
-    padding:      '12px 28px',
-    zIndex:       '9999',
-    whiteSpace:   'nowrap',
-    opacity:      '0',
-    transition:   'opacity .4s ease, transform .4s ease',
-    backdropFilter:'blur(12px)',
-  });
-  document.body.appendChild(toast);
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    toast.style.opacity   = '1';
-    toast.style.transform = 'translateX(-50%) translateY(0)';
-  }));
-  setTimeout(() => {
-    toast.style.opacity   = '0';
-    toast.style.transform = 'translateX(-50%) translateY(8px)';
-    setTimeout(() => toast.remove(), 500);
-  }, 4000);
-
-  // Clean URL
-  history.replaceState(null, '', window.location.pathname);
-})();
 </script>
 
 </body>
