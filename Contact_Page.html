@@ -648,6 +648,43 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
 /* Desktop nav always visible */
 @media (min-width: 901px) { #wf-mobile-menu { display: none !important; } }
 
+
+  /* ── Coming-soon social icons ── */
+  .social-coming-soon {
+    position: relative;
+    opacity: 0.32;
+    cursor: not-allowed;
+    pointer-events: none; /* blocks click */
+  }
+  /* Re-enable pointer-events so tooltip can appear on touch/desktop */
+  .social-coming-soon-wrap {
+    position: relative;
+    display: inline-flex;
+    cursor: not-allowed;
+  }
+  .social-coming-soon-wrap::after {
+    content: "Coming soon";
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20,14,8,.85);
+    color: #D4B896;
+    font-size: 10px;
+    font-family: 'Neuzon', serif;
+    letter-spacing: .06em;
+    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(212,184,150,.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 999;
+  }
+  .social-coming-soon-wrap:hover::after {
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
@@ -779,8 +816,8 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
 
         <div class="info-rule" aria-hidden="true"></div>
 
-        <a class="contact-item" href="https://instagram.com/WildFellasExpeditions"
-           target="_blank" rel="noopener" aria-label="Instagram">
+        <a class="contact-item" href="https://instagram.com/gowildfellas"
+           target="_blank" rel="noopener noreferrer" aria-label="WildFellas on Instagram">
           <div class="contact-item-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
                  stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
@@ -791,7 +828,7 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
           </div>
           <div class="contact-item-text">
             <span class="contact-item-label">Instagram</span>
-            <span class="contact-item-value">@WildFellasExpeditions</span>
+            <span class="contact-item-value">@gowildfellas</span>
           </div>
         </a>
 
