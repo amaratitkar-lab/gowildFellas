@@ -323,7 +323,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   bottom: clamp(80px,14vh,140px);
   right: clamp(24px,5.5vw,72px);
   z-index: 2;
-  font-size: clamp(64px,13vw,148px);
+  font-size: clamp(40px,7vw,88px);
   letter-spacing: -.04em; text-transform: uppercase;
   color: rgba(212,184,150,.028);
   white-space: nowrap; pointer-events: none; user-select: none; line-height: 1;
@@ -358,13 +358,14 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 
 .hero-heading {
-  font-size: clamp(50px, 8.5vw, 96px);
+  font-size: clamp(38px, 6vw, 72px);
   letter-spacing: -.035em; color: var(--cream); line-height: .98;
   margin-bottom: 28px;
   opacity: 0; transform: translateY(22px);
   animation: hFadeUp .85s var(--ease-out) .4s forwards;
 }
 .hero-heading em { font-style: italic; color: var(--gold); }
+.hero-heading strong { font-style: normal; color: var(--gold); font-weight: normal; }
 .heading-indent {
   display: block;
   padding-left: clamp(28px, 5vw, 64px);
@@ -538,6 +539,32 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .dest-row:hover { background: rgba(212,184,150,.04); }
 .dest-row:hover::before { transform: scaleX(1); }
 
+/* Card image thumbnail */
+.dest-img {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin: calc(-1 * clamp(18px, 2.5vw, 28px))
+          calc(-1 * clamp(18px, 2.5vw, 28px))
+          clamp(14px, 1.8vw, 20px);
+}
+.dest-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  filter: sepia(8%) contrast(1.06) brightness(.85);
+  transform: scale(1.06);
+  transition: transform 1s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+.dest-row:hover .dest-img img { transform: scale(1.11); }
+.dest-img-ov {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(13,13,10,.1) 0%,
+    transparent 45%,
+    rgba(13,13,10,.6) 100%);
+}
+
 /* Index number */
 .dest-num {
   font-size: 9px; letter-spacing: .12em;
@@ -602,6 +629,89 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   font-size: 11px; font-style: italic;
   color: rgba(212,184,150,.28); letter-spacing: .06em;
 }
+
+/* ── Active / bookable destination badge ── */
+.dest-badge-live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(212,184,150,.38);
+  background: rgba(212,184,150,.07); padding: 3px 10px;
+  margin-bottom: 10px;
+}
+.live-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--gold);
+  animation: pulseDot 1.8s infinite; flex-shrink: 0;
+}
+
+/* ── Horizon strip — "coming later" reserves ── */
+.horizon-strip {
+  border: 1px solid rgba(212,184,150,.1);
+  background: rgba(212,184,150,.03);
+  padding: 18px 24px;
+  margin-top: 4px;
+}
+.horizon-label {
+  font-size: 9px; letter-spacing: .32em; text-transform: uppercase;
+  color: rgba(212,184,150,.3); font-style: italic; margin-bottom: 10px;
+}
+.horizon-list {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.horizon-tag {
+  font-size: 10.5px; letter-spacing: .1em;
+  color: rgba(212,184,150,.35);
+  border: 1px solid rgba(212,184,150,.12);
+  padding: 5px 13px;
+}
+
+/* ── Birding coming-soon card ── */
+.birding-soon-card {
+  border: 1px solid rgba(212,184,150,.13);
+  background: var(--bg-card);
+  padding: clamp(28px,4vw,48px) clamp(24px,3.5vw,40px);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+  position: relative; overflow: hidden;
+}
+.birding-soon-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, transparent, rgba(212,184,150,.35), transparent);
+  pointer-events: none;
+}
+.birding-soon-left { display: flex; flex-direction: column; gap: 10px; max-width: 520px; }
+.birding-soon-tag {
+  font-size: 9px; letter-spacing: .32em; text-transform: uppercase;
+  color: rgba(212,184,150,.4); font-style: italic;
+  display: flex; align-items: center; gap: 10px;
+}
+.birding-soon-tag::before {
+  content: ''; display: inline-block; width: 20px; height: 1px;
+  background: rgba(212,184,150,.35);
+}
+.birding-soon-title {
+  font-size: clamp(20px, 2.5vw, 28px); letter-spacing: -.02em; color: var(--cream);
+}
+.birding-soon-title em { font-style: italic; color: var(--gold); }
+.birding-soon-desc {
+  font-size: 12.5px; color: rgba(245,237,224,.38); line-height: 1.8;
+}
+.birding-soon-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(212,184,150,.28);
+  padding: 11px 26px; background: transparent; flex-shrink: 0;
+  transition: color .35s, border-color .35s, background .35s;
+  -webkit-tap-highlight-color: transparent;
+  position: relative; overflow: hidden;
+}
+.birding-soon-cta::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: translateX(-101%); transition: transform .45s var(--ease-out); z-index: 0;
+}
+.birding-soon-cta > * { position: relative; z-index: 1; }
+.birding-soon-cta:hover { color: var(--ink); border-color: var(--gold); }
+.birding-soon-cta:hover::before { transform: translateX(0); }
 
 /* ── Section separator ── */
 .section-sep {
@@ -706,6 +816,25 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .footer-contact-cluster {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
 }
+.footer-social-cluster {
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
+.footer-social-link {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  border: 1px solid rgba(212,184,150,.15);
+  background: transparent;
+  color: rgba(245,237,224,.32);
+  transition: color .3s, border-color .3s, background .3s;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.footer-social-link:hover {
+  color: var(--gold);
+  border-color: rgba(212,184,150,.45);
+  background: rgba(212,184,150,.06);
+}
+.footer-social-link svg { display: block; flex-shrink: 0; }
 .footer-contact-chip {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 11.5px; letter-spacing: .04em;
@@ -854,6 +983,43 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 /* Desktop nav always visible */
 @media (min-width: 901px) { #wf-mobile-menu { display: none !important; } }
 
+
+  /* ── Coming-soon social icons ── */
+  .social-coming-soon {
+    position: relative;
+    opacity: 0.32;
+    cursor: not-allowed;
+    pointer-events: none; /* blocks click */
+  }
+  /* Re-enable pointer-events so tooltip can appear on touch/desktop */
+  .social-coming-soon-wrap {
+    position: relative;
+    display: inline-flex;
+    cursor: not-allowed;
+  }
+  .social-coming-soon-wrap::after {
+    content: "Coming soon";
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20,14,8,.85);
+    color: #D4B896;
+    font-size: 10px;
+    font-family: 'Neuzon', serif;
+    letter-spacing: .06em;
+    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(212,184,150,.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 999;
+  }
+  .social-coming-soon-wrap:hover::after {
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
@@ -876,7 +1042,16 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     <a class="wf-nav-link"        href="Contact_Page.html">Contact Us</a>
   </nav>
 
-
+  <div class="wf-nav-right">
+    <div class="wf-nav-divider" aria-hidden="true"></div>
+    <a class="wf-nav-cta" href="Contact_Page.html" aria-label="Book a safari">
+      <span>Book a Safari</span>
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
 
   <button class="wf-hamburger" id="wf-hamburger"
           aria-label="Toggle navigation menu" aria-expanded="false"
@@ -895,6 +1070,15 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     <a class="wf-mobile-link"        href="Contact_Page.html">Contact Us<span class="wf-mobile-num">04</span></a>
   </div>
 
+  <div class="wf-mobile-cta-wrap">
+    <a class="wf-mobile-cta" href="Contact_Page.html" aria-label="Book a safari" onclick="toggleMobileMenu()">
+      Book a Safari
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
   <div class="wf-mobile-footer" aria-hidden="true">
     <span class="wf-mobile-footer-text">© 2026 WildFellas</span>
     <span class="wf-mobile-footer-text">Pune, India</span>
@@ -925,18 +1109,18 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
     <p class="hero-eyebrow">
       <span class="hero-eyebrow-dash" aria-hidden="true"></span>
-      Curated Expeditions · 2026
+      WildFellas Expeditions · Est. 2026
     </p>
 
     <h1 class="hero-heading">
-      Choose Your
-      <span class="heading-indent"><em>Wilderness.</em></span>
+      Where Every Trail
+      <span class="heading-indent">Tells a <em>Story.</em></span>
     </h1>
 
     <p class="hero-sub">
-      Tiger trails. Monsoon birding. Night herping. Every expedition we run
-      is intimate, expert-led, and built around genuine wildlife encounters —
-      not tick-lists.
+      We began where India's tiger stories are written —
+      <strong>Pench Tiger Reserve.</strong> Two pilot expeditions. Real encounters.
+      Now we're ready to take you in. October onwards, the wild opens up.
     </p>
 
     <div class="hero-tabs" role="tablist" aria-label="Filter expeditions by type">
@@ -945,9 +1129,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       <button class="hero-tab" role="tab" aria-selected="false"
               onclick="filterSection('tiger', this)">Tiger Safaris</button>
       <button class="hero-tab" role="tab" aria-selected="false"
-              onclick="filterSection('birding', this)">Birdwatching</button>
-      <button class="hero-tab" role="tab" aria-selected="false"
-              onclick="filterSection('herping', this)">Herping</button>
+              onclick="filterSection('birding', this)">Birding Trips</button>
     </div>
 
   </div>
@@ -974,95 +1156,89 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   <div id="tiger-section" data-section="tiger" class="tours-section t-reveal">
 
     <div class="tours-section-header">
-      <p class="tours-section-eyebrow">Upcoming Tours</p>
+      <p class="tours-section-eyebrow">Signature Expeditions</p>
       <h2 class="tours-section-h2">Tiger Safaris</h2>
       <div class="tours-section-rule" aria-hidden="true"></div>
     </div>
 
     <p class="season-note t-reveal t-d1">
-      <strong>Season note:</strong>
-      October – June is prime tiger sighting season across all five reserves.
-      First official safaris open October 2026.
+      <strong>Season opens October 2026.</strong>
+      We've completed two pilot expeditions to Pench — both unforgettable.
+      Dates for October will be announced soon. Bandhavgarh and Tadoba follow shortly after.
     </p>
 
     <div class="dest-list">
 
-      <div class="dest-row t-reveal t-d1" onclick="openModal('Pench Tiger Reserve')"
-           role="button" tabindex="0" aria-label="Pench Tiger Reserve">
+      <!-- Pench — ACTIVE -->
+      <div class="dest-row t-reveal t-d1" onclick="location.href='Contact_Page.html'"
+           role="button" tabindex="0" aria-label="Pench Tiger Reserve — Book Now">
+        <div class="dest-img">
+          <img src="assets/images/hero-tiger.jpg" alt="Bengal tiger in Pench forest — WildFellas" loading="lazy"/>
+          <div class="dest-img-ov" aria-hidden="true"></div>
+        </div>
         <span class="dest-num">01</span>
         <div class="dest-body">
+          <div class="dest-badge-live"><span class="live-dot" aria-hidden="true"></span>Dates Announcing Soon</div>
           <div class="dest-name">Pench <em>Tiger Reserve</em></div>
-          <div class="dest-location">Madhya Pradesh</div>
-          <div class="dest-desc">The landscape that inspired The Jungle Book. Dense teak forests and storied tigresses along the Pench river.</div>
+          <div class="dest-location">Madhya Pradesh · Maharashtra Border</div>
+          <div class="dest-desc">The landscape that inspired The Jungle Book. Our home ground — two pilot trips done, both unforgettable. October 2026 onwards.</div>
         </div>
         <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
+          <span class="dest-status" style="color:rgba(212,184,150,.6);">Register Interest →</span>
         </div>
       </div>
 
-      <div class="dest-row t-reveal t-d2" onclick="openModal('Tadoba Tiger Reserve')"
-           role="button" tabindex="0" aria-label="Tadoba Tiger Reserve">
-        <span class="dest-num">02</span>
-        <div class="dest-body">
-          <div class="dest-name">Tadoba <em>Tiger Reserve</em></div>
-          <div class="dest-location">Maharashtra</div>
-          <div class="dest-desc">Maharashtra's oldest and largest reserve. Open meadows, dry deciduous forests, one of India's highest tiger densities.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
-      <div class="dest-row t-reveal t-d3" onclick="openModal('Panna Tiger Reserve')"
-           role="button" tabindex="0" aria-label="Panna Tiger Reserve">
-        <span class="dest-num">03</span>
-        <div class="dest-body">
-          <div class="dest-name">Panna <em>Tiger Reserve</em></div>
-          <div class="dest-location">Vindhya Range · Madhya Pradesh</div>
-          <div class="dest-desc">A conservation comeback story on the Ken River. Rocky gorges, crocodiles, vultures, and tigers reclaiming their kingdom.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
-      <div class="dest-row t-reveal t-d4" onclick="openModal('Kanha Tiger Reserve')"
-           role="button" tabindex="0" aria-label="Kanha Tiger Reserve">
-        <span class="dest-num">04</span>
-        <div class="dest-body">
-          <div class="dest-name">Kanha <em>Tiger Reserve</em></div>
-          <div class="dest-location">Madhya Pradesh</div>
-          <div class="dest-desc">India's finest reserve and inspiration for Kipling's Mowgli. Sweeping meadows, sal forests, and the rescued Barasingha swamp deer.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
-      <div class="dest-row t-reveal t-d5" onclick="openModal('Bandhavgarh Tiger Reserve')"
+      <!-- Bandhavgarh — Oct 2026 -->
+      <div class="dest-row t-reveal t-d2" onclick="openModal('Bandhavgarh Tiger Reserve')"
            role="button" tabindex="0" aria-label="Bandhavgarh Tiger Reserve">
-        <span class="dest-num">05</span>
+        <div class="dest-img">
+          <img src="assets/images/hero-tiger.jpg" alt="Ancient fort ruins at Bandhavgarh — WildFellas" loading="lazy"/>
+          <div class="dest-img-ov" aria-hidden="true"></div>
+        </div>
+        <span class="dest-num">02</span>
         <div class="dest-body">
           <div class="dest-name">Bandhavgarh <em>Tiger Reserve</em></div>
           <div class="dest-location">Madhya Pradesh</div>
           <div class="dest-desc">Highest tiger density in India. Ancient fort ruins overlooking the forest — a landscape that feels like a lost kingdom.</div>
         </div>
         <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
+          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Oct 2026</span>
+          <span class="dest-arrow" aria-hidden="true">→</span>
+        </div>
+      </div>
+
+      <!-- Tadoba — Oct 2026 -->
+      <div class="dest-row t-reveal t-d3" onclick="openModal('Tadoba Tiger Reserve')"
+           role="button" tabindex="0" aria-label="Tadoba Tiger Reserve">
+        <div class="dest-img">
+          <img src="assets/images/hero-tiger.jpg" alt="Tadoba open meadows — WildFellas" loading="lazy"/>
+          <div class="dest-img-ov" aria-hidden="true"></div>
+        </div>
+        <span class="dest-num">03</span>
+        <div class="dest-body">
+          <div class="dest-name">Tadoba <em>Tiger Reserve</em></div>
+          <div class="dest-location">Maharashtra</div>
+          <div class="dest-desc">Maharashtra's oldest reserve. Open meadows, dry deciduous forest, and one of India's highest tiger densities.</div>
+        </div>
+        <div class="dest-right">
+          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Oct 2026</span>
           <span class="dest-arrow" aria-hidden="true">→</span>
         </div>
       </div>
 
     </div>
 
-    <div class="status-strip t-reveal t-d5">
-      <div class="status-strip-text">
-        <span class="upcoming-dot" style="width:5px;height:5px;" aria-hidden="true"></span>
-        Pench · Tadoba · Panna · Kanha · Bandhavgarh — Opening October 2026
+    <!-- On the horizon -->
+    <div class="horizon-strip t-reveal t-d4">
+      <p class="horizon-label">On the Horizon</p>
+      <div class="horizon-list">
+        <span class="horizon-tag">Panna</span>
+        <span class="horizon-tag">Kanha</span>
+        <span class="horizon-tag">Dudhwa</span>
+        <span class="horizon-tag">Pilibhit</span>
+        <span class="horizon-tag">Jim Corbett</span>
+        <span class="horizon-tag">Gothangaon</span>
+        <span class="horizon-tag">Rajaji</span>
       </div>
     </div>
 
@@ -1070,131 +1246,35 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
   <div class="section-sep" aria-hidden="true"></div>
 
-  <!-- ════════ BIRDWATCHING ════════ -->
+  <!-- ════════ BIRDING ════════ -->
   <div id="birding-section" data-section="birding" class="tours-section t-reveal">
 
     <div class="tours-section-header">
-      <p class="tours-section-eyebrow">Monsoon &amp; Beyond</p>
-      <h2 class="tours-section-h2">Birdwatching</h2>
+      <p class="tours-section-eyebrow">Coming Soon</p>
+      <h2 class="tours-section-h2">Birding Trips</h2>
       <div class="tours-section-rule" aria-hidden="true"></div>
     </div>
 
-    <p class="season-note t-reveal t-d1">
-      <strong>Monsoon season:</strong>
-      Our birding trips kick off during the monsoon — the best time for breeding plumage, migratory arrivals, and lush canopy activity.
-    </p>
-
-    <div class="dest-list">
-
-      <div class="dest-row t-reveal t-d1" onclick="openModal('Tamhini Ghats')"
-           role="button" tabindex="0" aria-label="Tamhini Ghats">
-        <span class="dest-num">01</span>
-        <div class="dest-body">
-          <div class="dest-name">Tamhini <em>Ghats</em></div>
-          <div class="dest-location">Western Ghats · Maharashtra</div>
-          <div class="dest-desc">Monsoon magic in the Sahyadris. Malabar Whistling Thrush, Malabar Parakeet, and cascading waterfalls.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
+    <div class="birding-soon-card t-reveal t-d1">
+      <div class="birding-soon-left">
+        <p class="birding-soon-tag">Starting Soon</p>
+        <h3 class="birding-soon-title">Birding Trips — <em>Launching Soon</em></h3>
+        <p class="birding-soon-desc">
+          From Western Ghats monsoon birding to wetland flamingos — we're putting together
+          curated, expert-led birding experiences. Be the first to know when dates are live.
+        </p>
       </div>
-
-      <div class="dest-row t-reveal t-d2" onclick="openModal('Bhigwan Wetlands')"
-           role="button" tabindex="0" aria-label="Bhigwan Wetlands">
-        <span class="dest-num">02</span>
-        <div class="dest-body">
-          <div class="dest-name">Bhigwan <em>Wetlands</em></div>
-          <div class="dest-location">Pune District · Maharashtra</div>
-          <div class="dest-desc">Maharashtra's flamingo capital. Thousands of Lesser Flamingos and migratory waders on the Ujjani reservoir backwaters.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
-      <div class="dest-row t-reveal t-d3" onclick="openModal('Dandeli Wildlife Sanctuary')"
-           role="button" tabindex="0" aria-label="Dandeli Wildlife Sanctuary">
-        <span class="dest-num">03</span>
-        <div class="dest-body">
-          <div class="dest-name">Dandeli <em>Wildlife Sanctuary</em></div>
-          <div class="dest-location">Uttara Kannada · Karnataka</div>
-          <div class="dest-desc">A birder's paradise along the Kali river. Malabar Pied Hornbill, Crested Serpent Eagle, and the rare Sri Lanka Frogmouth.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
+      <a class="birding-soon-cta" href="Contact_Page.html">
+        <span>Notify Me</span>
+        <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+          <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
 
   </div>
 
-  <div class="section-sep" aria-hidden="true"></div>
-
-  <!-- ════════ HERPING ════════ -->
-  <div id="herping-section" data-section="herping" class="tours-section t-reveal">
-
-    <div class="tours-section-header">
-      <p class="tours-section-eyebrow">Reptiles &amp; Amphibians</p>
-      <h2 class="tours-section-h2">Herping</h2>
-      <div class="tours-section-rule" aria-hidden="true"></div>
-    </div>
-
-    <p class="season-note t-reveal t-d1">
-      <strong>Monsoon &amp; post-monsoon:</strong>
-      Herping peaks during and just after the monsoon when frogs, snakes, and lizards are at maximum activity. Night walks included on all trips.
-    </p>
-
-    <div class="dest-list">
-
-      <div class="dest-row t-reveal t-d1" onclick="openModal('Matheran')"
-           role="button" tabindex="0" aria-label="Matheran">
-        <span class="dest-num">01</span>
-        <div class="dest-body">
-          <div class="dest-name">Matheran</div>
-          <div class="dest-location">Raigad · Maharashtra</div>
-          <div class="dest-desc">India's only car-free hill station. Night walks through misty forest reveal geckos, Malabar pit vipers, and endemic frogs.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
-      <div class="dest-row t-reveal t-d2" onclick="openModal('Amboli')"
-           role="button" tabindex="0" aria-label="Amboli">
-        <span class="dest-num">02</span>
-        <div class="dest-body">
-          <div class="dest-name">Amboli</div>
-          <div class="dest-location">Sahyadri · Maharashtra</div>
-          <div class="dest-desc">India's herping capital. Multiple endemics — Amboli Toad, Amboli Bush Frog, and Malabar Gliding Frog.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
-      <div class="dest-row t-reveal t-d3" onclick="openModal('Phansad')"
-           role="button" tabindex="0" aria-label="Phansad">
-        <span class="dest-num">03</span>
-        <div class="dest-body">
-          <div class="dest-name">Phansad</div>
-          <div class="dest-location">Coastal Sanctuary · Maharashtra</div>
-          <div class="dest-desc">A hidden coastal sanctuary. Indian monitor lizard and star tortoises in coastal woodland — rarely visited, deeply rewarding.</div>
-        </div>
-        <div class="dest-right">
-          <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Upcoming</span>
-          <span class="dest-arrow" aria-hidden="true">→</span>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
 
   <!-- ════════ BOTTOM CTA ════════ -->
   <div class="tours-cta t-reveal">
@@ -1233,6 +1313,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       <a class="footer-nav-link active" href="Tours_Page.html">Tours</a>
       <a class="footer-nav-link"        href="Contact_Page.html">Contact Us</a>
     </nav>
+
     <div class="footer-contact-cluster">
       <a class="footer-contact-chip" href="mailto:wildfellas22@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
