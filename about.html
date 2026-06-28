@@ -988,149 +988,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 @media (max-width: 374px) { .founders-section { padding: 40px 16px; } }
 
 /* ═══════════════════════════════════════════════
-   NATURALISTS SECTION  (same design as founders)
-═══════════════════════════════════════════════ */
-.nat-section {
-  position: relative; background: var(--bg);
-  border-top: 1px solid rgba(212,184,150,.12);
-  padding: clamp(72px,10vh,112px) clamp(24px,6vw,96px); overflow: hidden;
-}
-.nat-wm {
-  position: absolute; bottom: -0.1em; left: 50%; transform: translateX(-50%);
-  font-size: clamp(72px,13vw,152px); letter-spacing: -.04em;
-  text-transform: uppercase; color: rgba(212,184,150,.025);
-  white-space: nowrap; pointer-events: none; user-select: none; z-index: 0; line-height: 1;
-}
-
-/* ── Section header ── */
-.nat-header {
-  position: relative; z-index: 1; max-width: 1280px;
-  margin: 0 auto clamp(48px,7vh,72px);
-  display: flex; align-items: flex-end;
-  justify-content: space-between; flex-wrap: wrap; gap: 20px;
-}
-.nat-header-left { display: flex; flex-direction: column; gap: 10px; }
-.nat-eyebrow {
-  display: flex; align-items: center; gap: 14px;
-  font-size: 10.5px; letter-spacing: .32em; text-transform: uppercase;
-  color: rgba(212,184,150,.45);
-}
-.nat-eyebrow-dash { display: inline-block; width: 28px; height: 1px; background: var(--gold-40); }
-.nat-header-title {
-  font-size: clamp(28px,4vw,44px); letter-spacing: -.022em;
-  color: var(--gold); font-style: italic; line-height: 1;
-}
-.nat-header-desc {
-  font-size: clamp(12.5px,1.3vw,14.5px); color: rgba(245,237,224,.38);
-  line-height: 1.8; max-width: 460px; align-self: flex-end;
-  padding-bottom: 4px;
-}
-
-/* ── Card grid — same class names as founders (efc) with nat- prefix ── */
-.nat-grid {
-  position: relative; z-index: 1; max-width: 420px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr; gap: 6px;
-}
-
-/* Reuse efc card styles with nat-efc prefix for isolation */
-.nat-efc {
-  background: var(--bg-card); border: 1px solid rgba(212,184,150,.13);
-  display: flex; flex-direction: column; overflow: hidden; position: relative;
-  opacity: 0; transform: translateY(28px);
-  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out),
-              border-color .4s, box-shadow .4s;
-}
-.nat-efc.visible { opacity: 1; transform: translateY(0); }
-.nat-efc:nth-child(1) { transition-delay: 0s; }
-.nat-efc:nth-child(2) { transition-delay: .1s; }
-.nat-efc:nth-child(3) { transition-delay: .2s; }
-.nat-efc:hover { border-color: rgba(212,184,150,.32); box-shadow: 0 14px 48px rgba(0,0,0,.45), 0 0 0 1px rgba(212,184,150,.06); }
-.nat-efc::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-  transform: scaleX(0); transition: transform .55s var(--ease-out); pointer-events: none;
-}
-.nat-efc:hover::before { transform: scaleX(1); }
-
-/* Photo */
-.nat-photo {
-  position: relative; width: 100%; aspect-ratio: 3 / 3.6;
-  overflow: hidden; flex-shrink: 0; background: #1a1810;
-}
-.nat-photo img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; filter: grayscale(14%) sepia(8%) contrast(1.06) brightness(.92);
-  transform: scale(1.06); transition: transform 1s var(--ease-out), filter .6s;
-}
-.nat-efc:hover .nat-photo img { transform: scale(1.12); filter: grayscale(0%) sepia(5%) contrast(1.04) brightness(1.0); }
-.nat-photo-ov {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to top, rgba(13,13,10,.82) 0%, rgba(13,13,10,.24) 42%, transparent 68%);
-}
-.nat-index {
-  position: absolute; top: 14px; left: 14px; z-index: 2;
-  font-size: clamp(10px,1vw,12px); letter-spacing: .24em; text-transform: uppercase;
-  color: rgba(212,184,150,.55); border: 1px solid rgba(212,184,150,.2);
-  background: rgba(13,13,10,.55); padding: 4px 10px;
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-}
-.nat-photo-name { position: absolute; bottom: 18px; left: 20px; right: 20px; z-index: 2; }
-.nat-photo-rule { width: 22px; height: 1px; background: rgba(212,184,150,.5); margin-bottom: 7px; }
-.nat-photo-title { font-size: clamp(18px,2.2vw,24px); letter-spacing: -.015em; color: var(--cream); line-height: 1.1; }
-
-/* Body */
-.nat-body {
-  padding: clamp(20px,2.5vw,30px) clamp(20px,2.5vw,30px) clamp(24px,3vw,36px);
-  display: flex; flex-direction: column; gap: clamp(14px,2vh,18px); flex: 1;
-}
-.nat-role {
-  display: inline-flex; align-self: flex-start;
-  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--gold); font-style: italic;
-  border: 1px solid rgba(212,184,150,.28); padding: 5px 12px;
-  background: rgba(212,184,150,.05); transition: border-color .35s, background .35s;
-}
-.nat-efc:hover .nat-role { border-color: rgba(212,184,150,.48); background: rgba(212,184,150,.09); }
-
-/* Expertise tags */
-.nat-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.nat-tag {
-  font-size: 9.5px; letter-spacing: .15em; text-transform: uppercase;
-  color: rgba(212,184,150,.6); font-style: italic;
-  border: 1px solid rgba(212,184,150,.18); padding: 3px 9px;
-  background: rgba(212,184,150,.04);
-  transition: border-color .3s, background .3s, color .3s;
-}
-.nat-efc:hover .nat-tag { border-color: rgba(212,184,150,.3); background: rgba(212,184,150,.07); color: rgba(212,184,150,.8); }
-
-.nat-rule { height: 1px; background: linear-gradient(to right, rgba(212,184,150,.18), transparent); transition: background .4s; }
-.nat-efc:hover .nat-rule { background: linear-gradient(to right, rgba(212,184,150,.38), transparent); }
-
-.nat-desc { flex: 1; font-size: clamp(12.5px,1.2vw,14px); color: var(--cream-50); line-height: 1.85; letter-spacing: .01em; }
-.nat-desc em { font-style: italic; color: rgba(212,184,150,.65); }
-
-.nat-foot {
-  margin: 0 clamp(20px,2.5vw,30px) clamp(18px,2.5vw,28px); height: 1px;
-  background: linear-gradient(to right, rgba(212,184,150,.14), transparent); transition: background .4s;
-}
-.nat-efc:hover .nat-foot { background: linear-gradient(to right, rgba(212,184,150,.35), transparent); }
-
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .nat-section { padding: clamp(56px,8vh,88px) clamp(20px,4vw,48px); }
-  .nat-grid { grid-template-columns: repeat(2,1fr); }
-  .nat-header-desc { display: none; }
-}
-@media (max-width: 600px) {
-  .nat-section { padding: clamp(48px,7vh,72px) max(20px,calc(18px + var(--safe-l))); }
-  .nat-wm { display: none; }
-  .nat-grid { grid-template-columns: 1fr; }
-  .nat-photo { aspect-ratio: 3/2.8; }
-}
-@media (max-width: 374px) { .nat-section { padding: 40px 16px; } }
-
-/* ═══════════════════════════════════════════════
    FOOTER  (same as Home Page)
 ═══════════════════════════════════════════════ */
 .wf-footer {
@@ -1179,6 +1036,25 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .footer-contact-cluster {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
 }
+.footer-social-cluster {
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
+.footer-social-link {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  border: 1px solid rgba(212,184,150,.15);
+  background: transparent;
+  color: rgba(245,237,224,.32);
+  transition: color .3s, border-color .3s, background .3s;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.footer-social-link:hover {
+  color: var(--gold);
+  border-color: rgba(212,184,150,.45);
+  background: rgba(212,184,150,.06);
+}
+.footer-social-link svg { display: block; flex-shrink: 0; }
 .footer-contact-chip {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 11.5px; letter-spacing: .04em;
@@ -1227,6 +1103,43 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .footer-nav-link { font-size: 10.5px; padding: 4px 10px; }
   .footer-wordmark-logo { height: 30px; }
 }
+
+  /* ── Coming-soon social icons ── */
+  .social-coming-soon {
+    position: relative;
+    opacity: 0.32;
+    cursor: not-allowed;
+    pointer-events: none; /* blocks click */
+  }
+  /* Re-enable pointer-events so tooltip can appear on touch/desktop */
+  .social-coming-soon-wrap {
+    position: relative;
+    display: inline-flex;
+    cursor: not-allowed;
+  }
+  .social-coming-soon-wrap::after {
+    content: "Coming soon";
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20,14,8,.85);
+    color: #D4B896;
+    font-size: 10px;
+    font-family: 'Neuzon', serif;
+    letter-spacing: .06em;
+    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(212,184,150,.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 999;
+  }
+  .social-coming-soon-wrap:hover::after {
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
@@ -1252,6 +1165,17 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   </nav>
 
   <!-- Hamburger -->
+  <div class="wf-nav-right">
+    <div class="wf-nav-divider" aria-hidden="true"></div>
+    <a class="wf-nav-cta" href="Contact_Page.html" aria-label="Book a safari">
+      <span>Book a Safari</span>
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
   <button class="wf-hamburger" id="wf-hamburger"
           aria-label="Toggle navigation menu"
           aria-expanded="false"
@@ -1269,6 +1193,15 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     <a class="wf-mobile-link active" href="about.html">About Us<span class="wf-mobile-num">02</span></a>
     <a class="wf-mobile-link"        href="Tours_Page.html">Tours<span class="wf-mobile-num">03</span></a>
     <a class="wf-mobile-link"        href="Contact_Page.html">Contact Us<span class="wf-mobile-num">04</span></a>
+  </div>
+  <div class="wf-mobile-cta-wrap">
+    <a class="wf-mobile-cta" href="Contact_Page.html" aria-label="Book a safari" onclick="toggleMobileMenu()">
+      Book a Safari
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
+        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
   </div>
   <div class="wf-mobile-footer" aria-hidden="true">
     <span class="wf-mobile-footer-text">© 2026 WildFellas</span>
@@ -1594,68 +1527,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════════════════
-     NATURALISTS
-══════════════════════════════════════════════ -->
-<section class="nat-section" id="naturalists" aria-label="Our Naturalists">
-
-  <span class="nat-wm" aria-hidden="true">Naturalists</span>
-
-  <!-- Header -->
-  <div class="nat-header">
-    <div class="nat-header-left">
-      <p class="nat-eyebrow">
-        <span class="nat-eyebrow-dash" aria-hidden="true"></span>
-        Field Experts
-      </p>
-      <h2 class="nat-header-title">Our Naturalists</h2>
-    </div>
-    <p class="nat-header-desc">
-      Field experts, educators, and scientists who bring the wild to life —
-      sharing knowledge that turns every sighting into a deeper story.
-    </p>
-  </div>
-
-  <!-- Cards -->
-  <div class="nat-grid" role="list">
-
-    <!-- ── Aditya Soman ── -->
-    <article class="nat-efc" role="listitem" aria-label="Aditya Soman — Naturalist">
-      <div class="nat-photo">
-        <img src="assets/images/Aditya_Soman.jpeg"
-             alt="Aditya Soman — Naturalist"
-             loading="lazy"
-             style="object-position: center 20%;"/>
-        <div class="nat-photo-ov" aria-hidden="true"></div>
-        <span class="nat-index" aria-hidden="true">01</span>
-        <div class="nat-photo-name">
-          <div class="nat-photo-rule" aria-hidden="true"></div>
-          <h3 class="nat-photo-title">Aditya Soman</h3>
-        </div>
-      </div>
-      <div class="nat-body">
-        <span class="nat-role">Naturalist</span>
-        <div class="nat-tags" aria-label="Areas of expertise">
-          <span class="nat-tag">Ecologist</span>
-          <span class="nat-tag">Herpetologist</span>
-          <span class="nat-tag">Photographer</span>
-          <span class="nat-tag">Nature Educator</span>
-        </div>
-        <div class="nat-rule" aria-hidden="true"></div>
-        <p class="nat-desc">
-          Ecologist, naturalist, nature educator, and photographer with
-          hands-on experience in herping since <em>2019</em> — bringing a rare
-          depth of field knowledge to every expedition.
-        </p>
-      </div>
-      <div class="nat-foot" aria-hidden="true"></div>
-    </article>
-
-
-  </div><!-- /nat-grid -->
-</section>
-
 </main>
 <!-- ══════════════════════════════════════════════
      FOOTER
@@ -1674,6 +1545,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       <a class="footer-nav-link" href="Tours_Page.html">Tours</a>
       <a class="footer-nav-link" href="Contact_Page.html">Contact Us</a>
     </nav>
+
     <div class="footer-contact-cluster">
       <a class="footer-contact-chip" href="mailto:wildfellas22@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -1718,7 +1590,7 @@ document.querySelectorAll('img').forEach(img => {
   img.setAttribute('draggable', 'false');
 });
 /* ── Scroll-reveal for .ab-reveal elements ── */
-const abRevealEls = document.querySelectorAll('.ab-reveal, .mv-mission, .mv-image, .mv-vision, .efc, .nat-efc');
+const abRevealEls = document.querySelectorAll('.ab-reveal, .mv-mission, .mv-image, .mv-vision, .efc');
 const abObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
