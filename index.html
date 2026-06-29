@@ -184,7 +184,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 #wf-mobile-menu.open .wf-mobile-link:nth-child(3) { transition-delay: .19s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(4) { transition-delay: .25s; }
 .wf-mobile-link:hover, .wf-mobile-link.active { color: var(--gold); }
-.wf-mobile-num { font-size: 11px; letter-spacing: .2em; color: rgba(212,184,150,.18); align-self: flex-start; margin-top: 8px; }
 .wf-mobile-cta-wrap {
   margin-top: 36px; transform: translateY(20px); opacity: 0;
   transition: transform .55s var(--ease-out) .31s, opacity .55s var(--ease-out) .31s;
@@ -771,9 +770,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .sig-img-col img {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: 40% center;
+  object-fit: cover; object-position: 20% center;
   filter: sepia(10%) contrast(1.08) brightness(.96);
-  transform: scale(1.06); transform-origin: 40% center;
+  transform: scale(1.06); transform-origin: 20% center;
   transition: transform 1.1s var(--ease-out);
 }
 .sig-card:hover .sig-img-col img { transform: scale(1.12); }
@@ -889,6 +888,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .sig { padding: clamp(56px,8vh,88px) clamp(20px,4vw,48px); }
   .sig-card { grid-template-columns: 1fr; }
   .sig-img-col { min-height: clamp(240px,38vw,380px); }
+  .sig-img-col img { object-position: 40% center; transform-origin: 40% center; }
   /* On stacked layout, gradient goes bottom instead of right */
   .sig-img-col::after {
     background: linear-gradient(to bottom, transparent 55%, var(--bg-card) 100%);
@@ -1449,7 +1449,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 @media (max-width: 600px) {
   .merch { padding: clamp(48px,7vh,72px) max(20px,calc(18px + var(--safe-l))); }
   .merch-stage { min-height: 52vw; }
-  .merch-bg-text { font-size: clamp(52px,14vw,96px); }
+  .merch-bg-text { font-size: clamp(20px,6.5vw,52px); letter-spacing: -.02em; }
   .merch-heading { font-size: clamp(28px,8vw,44px); }
 }
 @media (max-width: 374px) {
@@ -1913,10 +1913,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 <!-- Mobile drawer -->
 <nav id="wf-mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
   <div class="wf-mobile-nav">
-    <a class="wf-mobile-link active" href="index.html">Home<span class="wf-mobile-num">01</span></a>
-    <a class="wf-mobile-link"        href="about.html">About Us<span class="wf-mobile-num">02</span></a>
-    <a class="wf-mobile-link"        href="Tours_Page.html">Tours<span class="wf-mobile-num">03</span></a>
-    <a class="wf-mobile-link"        href="Contact_Page.html">Contact Us<span class="wf-mobile-num">04</span></a>
+    <a class="wf-mobile-link active" href="index.html">Home</a>
+    <a class="wf-mobile-link"        href="about.html">About Us</a>
+    <a class="wf-mobile-link"        href="Tours_Page.html">Tours</a>
+    <a class="wf-mobile-link"        href="Contact_Page.html">Contact Us</a>
   </div>
 
   <div class="wf-mobile-cta-wrap">
@@ -2414,32 +2414,52 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
       <!-- Review 2 -->
       <div class="review-slide" data-index="1">
-        <!-- Opening mark -->
         <span class="quote-mark" aria-hidden="true">"</span>
-
-        <!-- Quote text -->
         <blockquote class="quote-body">
-          Our first jungle safari with Wild Fellas in Pench was an unforgettable experience!
-          We were lucky to spot <em>three tigresses, a majestic male tiger, a leopard</em>, a jackal,
-          colourful birds, deer, peacocks, and monkeys. The lush forest and incredible wildlife
-          made every moment exciting.
+          Our first jungle safari with Wild Fellas was an unforgettable experience, thanks to their amazing team.
+          From booking to the end of our trip, everything was perfectly planned and seamlessly organized,
+          making the entire experience completely <em>stress-free</em>.
           <br><br>
-          The stay was equally wonderful, with beautiful surroundings, comfortable rooms,
-          delicious food, and warm hospitality. A big thank you to the Wild Fellas team for
-          making our trip so <em>memorable</em>. We can't wait to come back and create many
-          more amazing memories with you! ❤️🐅🌿
+          A special shoutout to the guides and jeep drivers — their knowledge, tracking skills, and passion
+          for the forest helped us spot <em>three tigresses, a majestic male tiger, a leopard</em>, a jackal,
+          colourful birds, deer, peacocks, and monkeys. Their expertise truly made all the difference.
+          <br><br>
+          The stay was equally wonderful, with comfortable rooms, delicious food, and warm hospitality.
+          Thank you, Wild Fellas, for such a memorable trip. We can't wait to return for another adventure!
         </blockquote>
-
-        <!-- Ornament -->
         <div class="quote-ornament" aria-hidden="true">
           <span class="quote-orn-line"></span>
           <span class="quote-orn-diamond"></span>
           <span class="quote-orn-line"></span>
         </div>
-
-        <!-- Attribution -->
         <div class="quote-attribution">
           <p class="quote-author">Sucharita Patankar</p>
+          <p class="quote-author-title">Wildlife Safari Guest · Pench May 2026</p>
+        </div>
+      </div>
+
+      <!-- Review 3 -->
+      <div class="review-slide" data-index="2">
+        <span class="quote-mark" aria-hidden="true">"</span>
+        <blockquote class="quote-body">
+          Seeing our first wild tiger in its natural habitat — and from such a close distance —
+          was a <em>dream come true</em> and a memory we'll cherish forever. Along with incredible
+          wildlife sightings, every safari was exciting and unforgettable.
+          <br><br>
+          What made the experience truly special was the Wild Fellas team. Their passion for the jungle,
+          expert guides, and experienced drivers made every safari enjoyable and informative.
+          Their knowledge and dedication added so much to the experience.
+          <br><br>
+          Thank you, Wild Fellas, for an amazing trip and <em>memories that will stay with us for a lifetime</em>.
+          We can't wait to come back!
+        </blockquote>
+        <div class="quote-ornament" aria-hidden="true">
+          <span class="quote-orn-line"></span>
+          <span class="quote-orn-diamond"></span>
+          <span class="quote-orn-line"></span>
+        </div>
+        <div class="quote-attribution">
+          <p class="quote-author">Kalika Patankar</p>
           <p class="quote-author-title">Wildlife Safari Guest · Pench May 2026</p>
         </div>
       </div>
@@ -2456,6 +2476,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       <div class="reviews-dots">
         <button class="reviews-dot active" onclick="goToReview(0)" aria-label="Review 1"></button>
         <button class="reviews-dot" onclick="goToReview(1)" aria-label="Review 2"></button>
+        <button class="reviews-dot" onclick="goToReview(2)" aria-label="Review 3"></button>
       </div>
       <button class="reviews-arrow reviews-next" onclick="nextReview()" aria-label="Next review">
         <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
