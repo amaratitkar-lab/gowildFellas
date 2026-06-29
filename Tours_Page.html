@@ -1105,12 +1105,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 ══════════════════════════════════════════════ -->
 <section class="tours-hero" id="tours-hero" aria-label="WildFellas Expeditions Hero">
 
-  <!-- Background image — replace src with your actual hero photo -->
-  <div class="hero-bg">
-    <img src="assets/images/tours_hero.jpg"
-         alt="Tiger in the wild — WildFellas Expeditions"
-         loading="eager" id="hero-img"/>
-  </div>
+  <div class="hero-bg" style="background: linear-gradient(135deg, #0d0d0a 0%, #131008 50%, #0d0d0a 100%);"></div>
 
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-rule-l"   aria-hidden="true"></div>
@@ -1389,7 +1384,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 ══════════════════════════════════════════════ -->
 <script>
 /* ── Hero image loaded → trigger scale-in animation ── */
-const heroImg = document.getElementById('hero-img');
 const heroEl  = document.getElementById('tours-hero');
 if (heroImg.complete) heroEl.classList.add('loaded');
 else heroImg.addEventListener('load', () => heroEl.classList.add('loaded'));
