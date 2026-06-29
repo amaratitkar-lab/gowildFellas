@@ -105,11 +105,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .wf-logo img {
   height: 44px; width: auto;
-  filter: invert(1) sepia(1) saturate(1.4) hue-rotate(5deg) brightness(.88);
+  mix-blend-mode: screen;
   transition: filter .35s, transform .35s var(--ease-out);
 }
 .wf-logo:hover img {
-  filter: invert(1) sepia(1) saturate(2.2) hue-rotate(5deg) brightness(.92);
+  mix-blend-mode: screen; opacity: .85;
   transform: scale(1.04);
 }
 
@@ -787,11 +787,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .footer-wordmark-logo {
   height: 38px; width: auto;
-  filter: invert(1) sepia(1) saturate(1.4) hue-rotate(5deg) brightness(.88);
+  mix-blend-mode: screen;
   display: block; transition: filter .35s, opacity .35s;
 }
 .footer-wordmark-logo:hover {
-  filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(.92);
+  mix-blend-mode: screen;
   opacity: .85;
 }
 .footer-wordmark-tag {
@@ -1032,7 +1032,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 <header id="wf-nav">
 
   <a class="wf-logo" href="index.html" aria-label="WildFellas — Go to homepage">
-    <img src="assets/images/logo.jpeg" alt="WildFellas"/>
+    <img src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
   </a>
 
   <nav class="wf-nav-desktop" aria-label="Primary navigation">
@@ -1303,7 +1303,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   <div class="footer-main">
     <div class="footer-wordmark">
       <a href="index.html" aria-label="WildFellas — Home">
-        <img class="footer-wordmark-logo" src="assets/images/logo.jpeg" alt="WildFellas"/>
+        <img class="footer-wordmark-logo" src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
       </a>
       <span class="footer-wordmark-tag">Est. 2026 · Pune, India</span>
     </div>
@@ -1353,7 +1353,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
      onclick="if(event.target===this) closeModal()">
   <div class="cs-box">
     <button class="cs-close" onclick="closeModal()" aria-label="Close">✕</button>
-    <img class="cs-logo" src="assets/images/logo.jpeg" alt="WildFellas"/>
+    <img class="cs-logo" src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
     <div class="cs-divider" aria-hidden="true"></div>
     <p class="cs-tag">Coming Soon</p>
     <h3 class="cs-name" id="cs-name">—</h3>
