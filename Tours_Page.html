@@ -257,7 +257,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   overflow: hidden;
   background: var(--bg);
 }
@@ -333,10 +333,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .hero-content {
   position: relative; z-index: 3;
   padding:
-    clamp(52px, 9vh, 104px)
+    clamp(24px, 4vh, 48px)
     clamp(24px, 5.5vw, 72px)
-    clamp(56px, 9vh, 88px);
-  max-width: 920px;
+    clamp(24px, 4vh, 48px)
+    clamp(56px, 7.5vw, 108px);
+  max-width: 760px;
 }
 
 .hero-eyebrow {
@@ -358,8 +359,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 
 .hero-heading {
-  font-size: clamp(38px, 6vw, 72px);
-  letter-spacing: -.035em; color: var(--cream); line-height: .98;
+  font-size: clamp(26px, 3.4vw, 48px);
+  letter-spacing: -.03em; color: var(--cream); line-height: 1.05;
   margin-bottom: 28px;
   opacity: 0; transform: translateY(22px);
   animation: hFadeUp .85s var(--ease-out) .4s forwards;
@@ -791,7 +792,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   display: block; transition: filter .35s, opacity .35s;
 }
 .footer-wordmark-logo:hover {
-  mix-blend-mode: screen;
+  filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(.92);
   opacity: .85;
 }
 .footer-wordmark-tag {
@@ -964,6 +965,19 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .hero-meta-sep { display: none; }
   .hero-scroll-hint { border-left: none; }
 
+  .hero-content {
+    padding-left: max(24px, calc(20px + var(--safe-l)));
+    padding-right: max(20px, calc(16px + var(--safe-r)));
+  }
+  .hero-tabs { width: 100%; }
+  .hero-tab {
+    flex: 1 1 auto;
+    white-space: normal;
+    text-align: center;
+    padding: 10px 12px;
+    font-size: 9px;
+  }
+
   .tours-main { padding: clamp(40px,6vh,64px) max(20px, calc(18px + var(--safe-l))); }
   .dest-list { grid-template-columns: 1fr; }
   .tours-cta { padding-top: clamp(28px,4vh,44px); }
@@ -1064,10 +1078,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 <!-- Mobile fullscreen drawer -->
 <nav id="wf-mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
   <div class="wf-mobile-nav">
-    <a class="wf-mobile-link"        href="index.html">Home<span class="wf-mobile-num">01</span></a>
-    <a class="wf-mobile-link"        href="about.html">About Us<span class="wf-mobile-num">02</span></a>
-    <a class="wf-mobile-link active" href="Tours_Page.html">Tours<span class="wf-mobile-num">03</span></a>
-    <a class="wf-mobile-link"        href="Contact_Page.html">Contact Us<span class="wf-mobile-num">04</span></a>
+    <a class="wf-mobile-link"        href="index.html">Home</a>
+    <a class="wf-mobile-link"        href="about.html">About Us</a>
+    <a class="wf-mobile-link active" href="Tours_Page.html">Tours</a>
+    <a class="wf-mobile-link"        href="Contact_Page.html">Contact Us</a>
   </div>
 
   <div class="wf-mobile-cta-wrap">
@@ -1164,7 +1178,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     <p class="season-note t-reveal t-d1">
       <strong>Season opens October 2026.</strong>
       We've completed two pilot expeditions to Pench — both unforgettable.
-      Dates for October will be announced soon. Bandhavgarh and Tadoba follow shortly after.
+      Dates for October will be announced soon. Panna and Tadoba follow shortly after.
     </p>
 
     <div class="dest-list">
@@ -1173,7 +1187,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       <div class="dest-row t-reveal t-d1" onclick="location.href='Contact_Page.html'"
            role="button" tabindex="0" aria-label="Pench Tiger Reserve — Book Now">
         <div class="dest-img">
-          <img src="assets/images/hero-tiger.jpg" alt="Bengal tiger in Pench forest — WildFellas" loading="lazy"/>
+          <img src="assets/images/Pench02.jpg" alt="Leopard resting on a tree in Pench forest — WildFellas" loading="lazy"/>
           <div class="dest-img-ov" aria-hidden="true"></div>
         </div>
         <span class="dest-num">01</span>
@@ -1188,18 +1202,18 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
         </div>
       </div>
 
-      <!-- Bandhavgarh — Oct 2026 -->
-      <div class="dest-row t-reveal t-d2" onclick="openModal('Bandhavgarh Tiger Reserve')"
-           role="button" tabindex="0" aria-label="Bandhavgarh Tiger Reserve">
+      <!-- Panna — Oct 2026 -->
+      <div class="dest-row t-reveal t-d2" onclick="openModal('Panna Tiger Reserve')"
+           role="button" tabindex="0" aria-label="Panna Tiger Reserve">
         <div class="dest-img">
-          <img src="assets/images/hero-tiger.jpg" alt="Ancient fort ruins at Bandhavgarh — WildFellas" loading="lazy"/>
+          <img src="assets/images/Panna01.jpg" alt="Panna Tiger Reserve — WildFellas" loading="lazy"/>
           <div class="dest-img-ov" aria-hidden="true"></div>
         </div>
         <span class="dest-num">02</span>
         <div class="dest-body">
-          <div class="dest-name">Bandhavgarh <em>Tiger Reserve</em></div>
+          <div class="dest-name">Panna <em>Tiger Reserve</em></div>
           <div class="dest-location">Madhya Pradesh</div>
-          <div class="dest-desc">Highest tiger density in India. Ancient fort ruins overlooking the forest — a landscape that feels like a lost kingdom.</div>
+          <div class="dest-desc">Ken river gorges, pristine forests, and a tiger comeback story like no other. A hidden gem of central India.</div>
         </div>
         <div class="dest-right">
           <span class="dest-status"><span class="upcoming-dot" aria-hidden="true"></span>Oct 2026</span>
@@ -1211,7 +1225,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       <div class="dest-row t-reveal t-d3" onclick="openModal('Tadoba Tiger Reserve')"
            role="button" tabindex="0" aria-label="Tadoba Tiger Reserve">
         <div class="dest-img">
-          <img src="assets/images/hero-tiger.jpg" alt="Tadoba open meadows — WildFellas" loading="lazy"/>
+          <img src="assets/images/tadoba.jpg" alt="Two tigers in Tadoba forest — WildFellas" loading="lazy" style="filter: brightness(1.25) contrast(1.08) saturate(1.2) sepia(5%);"/>
           <div class="dest-img-ov" aria-hidden="true"></div>
         </div>
         <span class="dest-num">03</span>
@@ -1232,7 +1246,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     <div class="horizon-strip t-reveal t-d4">
       <p class="horizon-label">On the Horizon</p>
       <div class="horizon-list">
-        <span class="horizon-tag">Panna</span>
+        <span class="horizon-tag">Bandhavgarh</span>
         <span class="horizon-tag">Kanha</span>
         <span class="horizon-tag">Dudhwa</span>
         <span class="horizon-tag">Pilibhit</span>
