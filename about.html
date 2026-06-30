@@ -408,9 +408,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 /* ── Two-column grid ── */
 .ab-intro-inner {
   position: relative; z-index: 1;
-  max-width: 1280px; margin: 0 auto;
-  display: grid; grid-template-columns: 1.05fr .95fr;
-  gap: clamp(40px,6vw,100px); align-items: start;
+  max-width: 880px; margin: 0 auto;
 }
 
 /* ── Left: text ── */
@@ -593,16 +591,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 @media (max-width: 900px) {
   .ab-intro { padding: clamp(56px,8vh,88px) clamp(20px,4vw,48px); }
   .ab-intro::before { display: none; }
-  .ab-intro-inner { grid-template-columns: 1fr; gap: 44px; }
-  /* Card stacks above text on tablet */
-  .ab-exp-card { order: -1; }
-  .ab-exp-photo { aspect-ratio: 16/7; }
   .ab-cta-ghost { display: inline-flex; }
 }
 @media (max-width: 600px) {
   .ab-intro { padding: clamp(48px,7vh,72px) max(20px,calc(18px + var(--safe-l))); }
   .ab-intro-wm { display: none; }
-  .ab-exp-photo { aspect-ratio: 4/3; }
   .ab-cta-ghost { display: none; }
 }
 @media (max-width: 374px) {
@@ -1236,24 +1229,25 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
         <p class="ab-para">
           <strong>WildFellas</strong> is a wildlife tour and photography experience
           brand dedicated to bringing people closer to the raw beauty of nature
-          through immersive and meaningful journeys.
+          through immersive, premium journeys crafted for the modern explorer.
         </p>
 
         <p class="ab-para">
           Built on a shared passion for wildlife and storytelling, WildFellas
           brings together <em>Amar Atitkar</em>, <em>Jitesh Deshpande</em>, and
-          <em>Kalindi Koparde</em> — combining on-ground expertise with creative
-          direction, design, and marketing to craft well-rounded experiences.
+          <em>Kalindi Koparde</em> combining on-ground expertise with creative
+          direction, design, and marketing to craft well-rounded, elevated experiences.
         </p>
 
         <p class="ab-para">
           We curate journeys across India's iconic national parks, including
-          <em>Kanha, Tadoba, Pench, Jim Corbett, and Panna</em>, with a strong
-          focus on responsible tourism and ethical wildlife practices.
+          <em>Kanha, Tadoba, Pench, Jim Corbett, and Panna</em>, pairing premium
+          stays and personalised itineraries with a strong focus on responsible
+          tourism and ethical wildlife practices.
         </p>
 
         <p class="ab-para">
-          WildFellas is not just about travel — it's about discovery, learning,
+          WildFellas is not just about travel, it's about discovery, learning,
           and building a deeper connection with the natural world, while fostering
           awareness, respect, and conservation of wildlife.
         </p>
@@ -1275,80 +1269,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
     </div><!-- /left -->
 
-    <!-- ── Right: Inaugural expedition card ── -->
-    <div class="ab-exp-card ab-reveal ab-reveal-d2"
-         aria-label="Inaugural expedition — Pench Tiger Reserve">
-
-      <!-- Photo -->
-      <div class="ab-exp-photo">
-        <img src="assets/images/Pench01.jpg"
-             alt="Bengal tiger emerging through the forest at Pench Tiger Reserve — WildFellas inaugural trip"
-             loading="lazy"
-             draggable="false"
-             style="object-position: 62% 30%;"/>
-        <div class="ab-exp-photo-ov" aria-hidden="true"></div>
-
-        <!-- Inaugural badge -->
-        <span class="ab-exp-badge">
-          <span class="ab-exp-badge-dot" aria-hidden="true"></span>
-          Inaugural Expedition
-        </span>
-
-        <!-- Credit -->
-        <span class="ab-exp-credit" aria-hidden="true">Photo · Amar Atitkar</span>
-      </div>
-
-      <!-- Info -->
-      <div class="ab-exp-content">
-
-        <p class="ab-exp-loc">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D4B896" stroke-width="1.5"
-               stroke-linecap="round" stroke-linejoin="round" width="11" height="11">
-            <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          Pench Tiger Reserve, Madhya Pradesh
-        </p>
-
-        <h3 class="ab-exp-name">Pench Pilot Trip</h3>
-
-        <p class="ab-exp-tagline">
-          The journey that started it all — and proved that the wild
-          has stories worth telling.
-        </p>
-
-        <div class="ab-exp-sep" aria-hidden="true"></div>
-
-        <ul class="ab-exp-meta">
-          <li class="ab-exp-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                 stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
-              <rect x="3" y="4" width="18" height="18" rx="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8"  y1="2" x2="8"  y2="6"/>
-              <line x1="3"  y1="10" x2="21" y2="10"/>
-            </svg>
-            Completed 2025
-          </li>
-          <li class="ab-exp-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                 stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-            Multiple Jungle Safaris
-          </li>
-          <li class="ab-exp-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                 stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            Responsible Tourism
-          </li>
-        </ul>
-
-      </div>
-    </div><!-- /ab-exp-card -->
 
   </div>
 </section>
@@ -1379,7 +1299,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       </div>
 
       <p class="mv-mission-para">
-        We craft immersive journeys that go beyond safaris — blending
+        We craft immersive journeys that go beyond safaris, blending
         exploration, photography, and storytelling to inspire appreciation,
         ethical tourism, and conservation.
       </p>
@@ -1435,7 +1355,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
       <p class="mv-vision-para">
         We aim to build a community that connects deeply with wildlife and
-        actively supports its conservation — creating impact through
+        actively supports its conservation creating impact through
         awareness, respect, and shared experiences.
       </p>
 
@@ -1470,13 +1390,13 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
         <div class="efc-photo-name"><div class="efc-photo-rule" aria-hidden="true"></div><h3 class="efc-photo-title">Amar Atitkar</h3></div>
       </div>
       <div class="efc-body">
-        <span class="efc-role">Co-Founder · Wildlife Photographer</span>
-        <blockquote class="efc-quote">"The forest became my language — where silence speaks, and every moment tells a story waiting to be captured."</blockquote>
+        <span class="efc-role">Co-Founder · Expedition Lead</span>
+        <blockquote class="efc-quote">"The forest became my language where silence speaks, and every moment tells a story waiting to be captured."</blockquote>
         <div class="efc-rule" aria-hidden="true"></div>
         <div class="efc-desc">
-          <p class="efc-para">Wildlife photographer and nature enthusiast from Pune. Journey began in <em>2008 at Kanha National Park</em> — a single safari ignited a lifelong passion.</p>
-          <p class="efc-para">Being <em>hearing-impaired</em> shaped a unique connection with the wild — the forests became a language of observation beyond sound.</p>
-          <p class="efc-para">Explored India's iconic wildernesses — from <em>Kanha and Tadoba to Pench, Jim Corbett, and Panna</em> — documenting their beauty through the lens.</p>
+          <p class="efc-para">Wildlife photographer and nature enthusiast from Pune. Journey began in <em>2008 at Kanha National Park</em> a single safari ignited a lifelong passion.</p>
+          <p class="efc-para">Being <em>hearing-impaired</em> shaped a unique connection with the wild, the forests became a language of observation beyond sound.</p>
+          <p class="efc-para">Explored India's iconic wildernesses from <em>Kanha and Tadoba to Pench, Jim Corbett, and Panna</em> documenting their beauty through the lens.</p>
         </div>
       </div>
       <div class="efc-foot" aria-hidden="true"></div>
@@ -1491,11 +1411,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       </div>
       <div class="efc-body">
         <span class="efc-role">Co-Founder · Expedition Lead</span>
-        <blockquote class="efc-quote">"From lines of code to trails through the forest — the best algorithms are written by nature itself."</blockquote>
+        <blockquote class="efc-quote">"From lines of code to trails through the forest, the best algorithms are written by nature itself."</blockquote>
         <div class="efc-rule" aria-hidden="true"></div>
         <div class="efc-desc">
           <p class="efc-para">Backbone of the company and its biggest cheerleader. Leads <em>business strategy</em> while contributing creative thinking to everyday operations.</p>
-          <p class="efc-para">Former <em>IT professional</em> who left coding for VFX, channelling that creative energy into WildFellas — balancing structure, vision, and creativity.</p>
+          <p class="efc-para">Former <em>IT professional</em> who left coding for VFX, channelling that creative energy into WildFellas balancing structure, vision, and creativity.</p>
         </div>
       </div>
       <div class="efc-foot" aria-hidden="true"></div>
@@ -1510,11 +1430,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       </div>
       <div class="efc-body">
         <span class="efc-role">Co-Founder · Creative &amp; Marketing</span>
-        <blockquote class="efc-quote">"Design is how I speak — and the forest is where I find my deepest creative voice."</blockquote>
+        <blockquote class="efc-quote">"Design is how I speak and the forest is where I find my deepest creative voice."</blockquote>
         <div class="efc-rule" aria-hidden="true"></div>
         <div class="efc-desc">
           <p class="efc-para">Pune-based design professional with over <em>9 years of experience</em> in graphic design and art direction. Leads <em>marketing and branding</em> at WildFellas.</p>
-          <p class="efc-para">WildFellas is more than travel — it's a way of reconnecting with creative roots by becoming one with the forest.</p>
+          <p class="efc-para">WildFellas is more than travel, it's a way of reconnecting with creative roots by becoming one with the forest.</p>
         </div>
       </div>
       <div class="efc-foot" aria-hidden="true"></div>
@@ -1533,7 +1453,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       <a href="index.html" aria-label="WildFellas — Home">
         <img class="footer-wordmark-logo" src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
       </a>
-      <span class="footer-wordmark-tag">Est. 2026 · Pune, India</span>
+      <span class="footer-wordmark-tag">Pune, India</span>
     </div>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a class="footer-nav-link" href="index.html">Home</a>
