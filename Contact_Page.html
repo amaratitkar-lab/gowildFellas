@@ -211,10 +211,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 #wf-mobile-menu.open .wf-mobile-link:nth-child(3) { transition-delay: .19s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(4) { transition-delay: .25s; }
 .wf-mobile-link:hover, .wf-mobile-link.active { color: var(--gold); }
-.wf-mobile-num {
-  font-size: 11px; letter-spacing: .2em;
-  color: rgba(212,184,150,.18); align-self: flex-start; margin-top: 8px;
-}
 .wf-mobile-cta-wrap {
   margin-top: 36px; transform: translateY(20px); opacity: 0;
   transition: transform .55s var(--ease-out) .31s, opacity .55s var(--ease-out) .31s;
@@ -1097,11 +1093,17 @@ form.addEventListener('submit', async (e) => {
   submitIcon.style.opacity = '0';
 
   try {
-    const data = new FormData(form);
-    const res  = await fetch('https://api.web3forms.com/submit', {
+    const payload = {
+      name:     name,
+      email:    email,
+      phone:    form.querySelector('#f-phone').value.trim(),
+      interest: form.querySelector('#f-interest').value.trim(),
+      message:  message,
+    };
+    const res  = await fetch('/api/send-inquiry', {
       method:  'POST',
-      headers: { 'Accept': 'application/json' },
-      body:    data,
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
     });
     const json = await res.json();
 
