@@ -84,12 +84,16 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   display: flex; align-items: center; justify-content: space-between;
   padding-left:  max(52px, calc(52px + var(--safe-l)));
   padding-right: max(52px, calc(52px + var(--safe-r)));
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background .55s var(--ease-out), border-color .55s var(--ease-out), box-shadow .55s var(--ease-out);
+}
+#wf-nav.scrolled {
   background: var(--bg-nav);
-  border-bottom: 1px solid var(--gold-12);
+  border-bottom-color: var(--gold-12);
   box-shadow: 0 8px 40px rgba(0,0,0,.65);
   backdrop-filter: blur(28px) saturate(140%);
   -webkit-backdrop-filter: blur(28px) saturate(140%);
-  transition: box-shadow .55s var(--ease-out);
 }
 
 /* ── Logo ── */
@@ -742,7 +746,6 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
     </a>
   </div>
   <div class="wf-mobile-footer" aria-hidden="true">
-    <span class="wf-mobile-footer-text">© 2026 WildFellas</span>
     <span class="wf-mobile-footer-text">Pune, India</span>
   </div>
 </nav>
@@ -997,6 +1000,7 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
 <script>
 /* ── Scroll: progress bar ── */
 const progressEl = document.getElementById('wf-progress');
+const navEl = document.getElementById('wf-nav');
 let ticking = false;
 window.addEventListener('scroll', () => {
   if (!ticking) {
@@ -1004,6 +1008,7 @@ window.addEventListener('scroll', () => {
       const sy   = window.scrollY;
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       const pct  = docH > 0 ? (sy / docH) * 100 : 0;
+      navEl.classList.toggle('scrolled', sy > 40);
       progressEl.style.width = pct + '%';
       progressEl.classList.toggle('visible', sy > 100);
       ticking = false;
@@ -1093,17 +1098,11 @@ form.addEventListener('submit', async (e) => {
   submitIcon.style.opacity = '0';
 
   try {
-    const payload = {
-      name:     name,
-      email:    email,
-      phone:    form.querySelector('#f-phone').value.trim(),
-      interest: form.querySelector('#f-interest').value.trim(),
-      message:  message,
-    };
-    const res  = await fetch('/api/send-inquiry', {
+    const data = new FormData(form);
+    const res  = await fetch('https://api.web3forms.com/submit', {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload),
+      headers: { 'Accept': 'application/json' },
+      body:    data,
     });
     const json = await res.json();
 
