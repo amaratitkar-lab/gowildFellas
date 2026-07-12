@@ -200,7 +200,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 #wf-mobile-menu.open { pointer-events: all; opacity: 1; }
 .wf-mobile-nav { display: flex; flex-direction: column; }
 .wf-mobile-link {
-  font-size: small; letter-spacing: .04em;
+  font-size: clamp(30px, 8.5vw, 54px); letter-spacing: .04em;
   color: rgba(212,184,150,.2);
   padding: 13px 0;
   border-bottom: 1px solid rgba(212,184,150,.06);
@@ -954,7 +954,7 @@ a.contact-item:hover .contact-item-value { color: var(--gold); }
       <a href="index.html" aria-label="WildFellas — Home">
         <img class="footer-wordmark-logo" src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
       </a>
-      <span class="footer-wordmark-tag">Est. 2026 · Pune, India</span>
+      <span class="footer-wordmark-tag">Pune, India</span>
     </div>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a class="footer-nav-link"        href="index.html">Home</a>
