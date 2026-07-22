@@ -977,158 +977,153 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 @media (max-width: 374px) { .founders-section { padding: 40px 16px; } }
 
 /* ═══════════════════════════════════════════════
-   FOOTER  (same as Home Page)
+   FOOTER
 ═══════════════════════════════════════════════ */
 .wf-footer {
   position: relative;
   background: var(--bg);
-  border-top: 1px solid rgba(212,184,150,.14);
+  border-top: 1px solid var(--gold-12);
   z-index: 1;
+  text-align: center;
 }
-.footer-main {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 20px 32px;
-  padding: clamp(28px,4vh,44px) clamp(24px,6vw,96px);
-  border-bottom: 1px solid rgba(212,184,150,.07);
+.wf-footer::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold) 50%, transparent);
+  opacity: .55;
 }
-.footer-wordmark {
-  display: flex; flex-direction: column; gap: 7px; flex-shrink: 0;
+
+/* ── Centered wrapper ── */
+.footer-center {
+  max-width: 640px; margin: 0 auto;
+  padding: clamp(52px,7vh,84px) clamp(24px,6vw,48px) clamp(40px,5vh,56px);
+  display: flex; flex-direction: column; align-items: center;
 }
-.footer-wordmark-logo {
-  height: 38px; width: auto;
-  mix-blend-mode: screen;
-  display: block; transition: filter .35s, opacity .35s;
+
+/* Logo lockup */
+.footer-logo-link { display: inline-block; }
+.footer-brand-logo {
+  height: 42px; width: auto; mix-blend-mode: screen; display: block;
+  transition: opacity .35s;
 }
-.footer-wordmark-logo:hover {
-  mix-blend-mode: screen;
-  opacity: .85;
+.footer-logo-link:hover .footer-brand-logo { opacity: .8; }
+.footer-brand-kicker {
+  margin-top: 14px;
+  font-size: 9.5px; letter-spacing: .34em; text-transform: uppercase;
+  color: rgba(212,184,150,.32);
 }
-.footer-wordmark-tag {
-  font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-  color: rgba(212,184,150,.28);
+
+/* Ornamental divider with center diamond */
+.footer-divider {
+  position: relative;
+  width: 100%; max-width: 220px;
+  height: 1px;
+  margin: clamp(32px,4vh,44px) 0;
+  background: linear-gradient(to right, transparent, var(--gold-40) 50%, transparent);
 }
-.footer-nav {
-  display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+.footer-divider::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  width: 6px; height: 6px;
+  background: var(--bg);
+  border: 1px solid var(--gold);
+  transform: translate(-50%,-50%) rotate(45deg);
 }
-.footer-nav-link {
-  font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase;
-  color: rgba(245,237,224,.38);
-  padding: 4px clamp(12px,2vw,22px);
-  border-right: 1px solid rgba(212,184,150,.1);
+
+/* Explore nav row */
+.footer-nav-row {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; row-gap: 10px;
+}
+.footer-nav-row a {
+  font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(245,237,224,.42);
+  padding: 0 clamp(12px,2vw,20px);
+  transition: color .3s;
+  -webkit-tap-highlight-color: transparent;
+}
+.footer-nav-row a:not(:last-child) { border-right: 1px solid rgba(212,184,150,.14); }
+.footer-nav-row a:hover, .footer-nav-row a.active { color: var(--gold); }
+
+/* Contact row */
+.footer-info-row {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 24px;
+  margin-top: clamp(24px,3vh,32px);
+}
+.footer-info-row a {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; letter-spacing: .02em;
+  color: rgba(245,237,224,.44);
   transition: color .3s; -webkit-tap-highlight-color: transparent;
-  white-space: nowrap;
 }
-.footer-nav-link:first-child { padding-left: 0; }
-.footer-nav-link:last-child  { border-right: none; padding-right: 0; }
-.footer-nav-link:hover       { color: var(--gold); }
-.footer-nav-link.active      { color: var(--gold); }
-.footer-contact-cluster {
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-}
-.footer-social-cluster {
-  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+.footer-info-row a svg { opacity: .55; transition: opacity .3s; flex-shrink: 0; }
+.footer-info-row a:hover { color: var(--gold); }
+.footer-info-row a:hover svg { opacity: 1; }
+
+/* Social */
+.footer-social-block {
+  margin-top: clamp(28px,3.6vh,36px);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
 .footer-social-link {
   display: flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px;
-  border: 1px solid rgba(212,184,150,.15);
-  background: transparent;
-  color: rgba(245,237,224,.32);
-  transition: color .3s, border-color .3s, background .3s;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(212,184,150,.25);
+  color: rgba(245,237,224,.55);
+  transition: color .35s, border-color .35s, background .35s, transform .35s var(--ease-out);
   -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
 }
 .footer-social-link:hover {
-  color: var(--gold);
-  border-color: rgba(212,184,150,.45);
-  background: rgba(212,184,150,.06);
+  color: var(--bg); background: var(--gold); border-color: var(--gold);
+  transform: translateY(-2px) scale(1.05);
 }
-.footer-social-link svg { display: block; flex-shrink: 0; }
-.footer-contact-chip {
-  display: inline-flex; align-items: center; gap: 7px;
-  font-size: 11.5px; letter-spacing: .04em;
-  color: rgba(245,237,224,.42);
-  transition: color .3s; -webkit-tap-highlight-color: transparent; white-space: nowrap;
+.footer-social-link svg { display: block; }
+.footer-social-handle {
+  font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(212,184,150,.4);
+  transition: color .3s;
 }
-.footer-contact-chip svg { flex-shrink: 0; opacity: .55; transition: opacity .3s; }
-.footer-contact-chip:hover { color: var(--gold); }
-.footer-contact-chip:hover svg { opacity: 1; }
+.footer-social-block:hover .footer-social-handle { color: var(--gold); }
+
+/* ── Bottom strip ── */
 .footer-bottom {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 8px;
-  padding: clamp(12px,1.8vh,18px) clamp(24px,6vw,96px)
-           max(clamp(12px,1.8vh,18px), calc(clamp(12px,1.8vh,18px) + var(--safe-b)));
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 6px 18px;
+  padding: clamp(16px,2vh,20px) clamp(24px,6vw,96px)
+           max(clamp(16px,2vh,20px), calc(clamp(16px,2vh,20px) + var(--safe-b)));
+  border-top: 1px solid rgba(212,184,150,.08);
 }
 .footer-bottom-copy {
-  font-size: 10px; letter-spacing: .14em; font-style: italic;
-  color: rgba(212,184,150,.2);
+  font-size: 10px; letter-spacing: .1em; font-style: italic;
+  color: rgba(212,184,150,.24);
+}
+.footer-bottom-sep {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(212,184,150,.2);
 }
 .footer-back-top {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(212,184,150,.25);
+  color: rgba(212,184,150,.3);
   cursor: pointer; background: none; border: none;
   transition: color .3s; -webkit-tap-highlight-color: transparent;
 }
 .footer-back-top:hover { color: var(--gold); }
 .footer-back-top svg { transition: transform .35s var(--ease-out); }
 .footer-back-top:hover svg { transform: translateY(-3px); }
-@media (max-width: 900px) {
-  .footer-main { gap: 20px 24px; }
-}
+
+/* ── Responsive ── */
 @media (max-width: 600px) {
-  .footer-main {
-    flex-direction: column; align-items: flex-start;
-    padding: 28px max(20px, calc(18px + var(--safe-l)));
-    gap: 22px;
-  }
-  .footer-nav { flex-wrap: wrap; }
-  .footer-nav-link { font-size: 11px; letter-spacing: .12em; padding: 4px 14px; }
-  .footer-nav-link:first-child { padding-left: 0; }
-  .footer-contact-cluster { gap: 14px; }
-  .footer-bottom { padding: 12px max(20px, calc(18px + var(--safe-l))); }
+  .footer-center { padding: 44px max(20px, calc(18px + var(--safe-l))) 36px; }
+  .footer-nav-row a { padding: 0 12px; font-size: 11px; }
+  .footer-nav-row a:not(:last-child) { border-right: none; }
+  .footer-info-row { gap: 14px 20px; }
+  .footer-bottom { padding: 14px max(20px, calc(18px + var(--safe-l))) max(14px, calc(14px + var(--safe-b))); }
 }
 @media (max-width: 374px) {
-  .footer-nav-link { font-size: 10.5px; padding: 4px 10px; }
-  .footer-wordmark-logo { height: 30px; }
+  .footer-brand-logo { height: 34px; }
 }
-
-  /* ── Coming-soon social icons ── */
-  .social-coming-soon {
-    position: relative;
-    opacity: 0.32;
-    cursor: not-allowed;
-    pointer-events: none; /* blocks click */
-  }
-  /* Re-enable pointer-events so tooltip can appear on touch/desktop */
-  .social-coming-soon-wrap {
-    position: relative;
-    display: inline-flex;
-    cursor: not-allowed;
-  }
-  .social-coming-soon-wrap::after {
-    content: "Coming soon";
-    position: absolute;
-    bottom: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(20,14,8,.85);
-    color: #D4B896;
-    font-size: 10px;
-    font-family: 'Neuzon', serif;
-    letter-spacing: .06em;
-    white-space: nowrap;
-    padding: 3px 8px;
-    border-radius: 3px;
-    border: 1px solid rgba(212,184,150,.25);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .2s ease;
-    z-index: 999;
-  }
-  .social-coming-soon-wrap:hover::after {
-    opacity: 1;
-  }
 </style>
 </head>
 <body>
@@ -1447,40 +1442,62 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
      FOOTER
 ══════════════════════════════════════════════ -->
 <footer class="wf-footer" role="contentinfo">
-  <div class="footer-main">
-    <div class="footer-wordmark">
-      <a href="index.html" aria-label="WildFellas — Home">
-        <img class="footer-wordmark-logo" src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
-      </a>
-      <span class="footer-wordmark-tag">Pune, India</span>
-    </div>
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a class="footer-nav-link" href="index.html">Home</a>
-      <a class="footer-nav-link active" href="about.html">About Us</a>
-      <a class="footer-nav-link" href="Tours_Page.html">Tours</a>
-      <a class="footer-nav-link" href="Contact_Page.html">Contact Us</a>
+
+  <div class="footer-center">
+
+    <!-- Logo lockup -->
+    <a class="footer-logo-link" href="index.html" aria-label="WildFellas — Home">
+      <img class="footer-brand-logo" src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
+    </a>
+    <span class="footer-brand-kicker">Tiger Safari Expeditions · Pune, India</span>
+
+    <div class="footer-divider" aria-hidden="true"></div>
+
+    <!-- Explore -->
+    <nav class="footer-nav-row" aria-label="Footer navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About Us</a>
+      <a href="Tours_Page.html">Tours</a>
+      <a href="Contact_Page.html">Contact Us</a>
     </nav>
 
-    <div class="footer-contact-cluster">
-      <a class="footer-contact-chip" href="mailto:wildfellas22@gmail.com">
+    <!-- Contact -->
+    <div class="footer-info-row">
+      <a href="mailto:hey@gowildfellas.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
              stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
           <rect x="2" y="4" width="20" height="16" rx="2"/>
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
         </svg>
-        wildfellas22@gmail.com
+        <span>hey@gowildfellas.com</span>
       </a>
-      <a class="footer-contact-chip" href="tel:+919970004812">
+      <a href="tel:+919970004812">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
              stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.1 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
         </svg>
-        +91 99700 04812
+        <span>+91 88559 40100</span>
       </a>
     </div>
+
+    <!-- Follow -->
+    <div class="footer-social-block">
+      <a class="footer-social-link" href="https://instagram.com/gowildfellas" target="_blank" rel="noopener" aria-label="WildFellas on Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4.2"/>
+          <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <span class="footer-social-handle">@gowildfellas</span>
+    </div>
+
   </div>
+
+  <!-- Bottom strip -->
   <div class="footer-bottom">
     <p class="footer-bottom-copy">© 2026 WildFellas. All rights reserved.</p>
+    <span class="footer-bottom-sep" aria-hidden="true"></span>
     <button class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
             aria-label="Back to top">
       <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
@@ -1490,6 +1507,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
       Back to top
     </button>
   </div>
+
 </footer>
 
 
