@@ -201,11 +201,20 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   bottom: max(28px, calc(28px + var(--safe-b)));
   left:  max(40px, calc(40px + var(--safe-l)));
   right: max(40px, calc(40px + var(--safe-r)));
-  display: flex; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
   opacity: 0; transition: opacity .55s var(--ease-out) .37s;
 }
 #wf-mobile-menu.open .wf-mobile-footer { opacity: 1; }
 .wf-mobile-footer-text { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: rgba(212,184,150,.18); }
+.wf-mobile-social-link {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; margin: -10px;
+  color: rgba(212,184,150,.32);
+  transition: color .3s var(--ease-out), transform .3s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-mobile-social-link svg { position: relative; z-index: 1; display: block; }
+.wf-mobile-social-link:hover, .wf-mobile-social-link:active { color: var(--gold); transform: scale(1.1); }
 
 /* ═══════════════════════════════════════════════
    HERO
@@ -1940,8 +1949,15 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     </a>
   </div>
 
-  <div class="wf-mobile-footer" aria-hidden="true">
-    <span class="wf-mobile-footer-text">Pune, India</span>
+  <div class="wf-mobile-footer">
+    <span class="wf-mobile-footer-text" aria-hidden="true">Pune, India</span>
+    <a class="wf-mobile-social-link" href="https://instagram.com/gowildfellas" target="_blank" rel="noopener" aria-label="WildFellas on Instagram" onclick="toggleMobileMenu()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="17" height="17">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4.2"/>
+        <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
   </div>
 </nav>
 
