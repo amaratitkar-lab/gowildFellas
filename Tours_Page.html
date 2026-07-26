@@ -4,12 +4,12 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <meta name="theme-color" content="#0d0d0a"/>
-<title>WildFellas — Tours</title>
+<title>WildFellas — Contact Us</title>
 
 <style>
 
 /* ═══════════════════════════════════════════════
-   FONT
+   NEUZON FONT
 ═══════════════════════════════════════════════ */
 @font-face {
   font-family: 'Neuzon';
@@ -31,8 +31,7 @@
   --gold-08:   rgba(212,184,150,0.08);
   --gold-06:   rgba(212,184,150,0.06);
   --bg:        #0d0d0a;
-  --bg-card:   #15130f;
-  --bg-card-2: #1a1712;
+  --bg-card:   #131210;
   --bg-nav:    rgba(10,9,7,0.97);
   --cream:     #f5ede0;
   --cream-75:  rgba(245,237,224,0.75);
@@ -59,17 +58,19 @@ body {
   overscroll-behavior-x: none;
   min-height: 100dvh;
 }
-img { max-width: 100%; display: block; }
-button { font-family: inherit; }
-a { color: inherit; text-decoration: none; }
+a   { text-decoration: none; color: inherit; }
+img { display: block; }
+button { cursor: pointer; background: none; border: none; font-family: inherit; }
 
 /* ═══════════════════════════════════════════════
-   PROGRESS BAR
+   SCROLL PROGRESS BAR
 ═══════════════════════════════════════════════ */
 #wf-progress {
-  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-  background: var(--gold); z-index: 200;
-  opacity: 0; transition: opacity .3s, width .1s linear;
+  position: fixed; top: calc(var(--nav-h) + var(--safe-t)); left: 0;
+  height: 2px; width: 0%;
+  background: linear-gradient(to right, transparent, var(--gold) 40%, rgba(212,184,150,.3));
+  z-index: 99; pointer-events: none;
+  opacity: 0; transition: width .08s linear, opacity .4s;
 }
 #wf-progress.visible { opacity: 1; }
 
@@ -77,121 +78,175 @@ a { color: inherit; text-decoration: none; }
    NAVBAR
 ═══════════════════════════════════════════════ */
 #wf-nav {
-  position: sticky; top: 0; z-index: 100;
-  height: var(--nav-h);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 clamp(24px, 5.5vw, 72px);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: calc(var(--nav-h) + var(--safe-t));
   padding-top: var(--safe-t);
+  display: flex; align-items: center; justify-content: space-between;
+  padding-left:  max(52px, calc(52px + var(--safe-l)));
+  padding-right: max(52px, calc(52px + var(--safe-r)));
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background .35s, border-color .35s;
+  transition: background .55s var(--ease-out), border-color .55s var(--ease-out), box-shadow .55s var(--ease-out);
 }
 #wf-nav.scrolled {
   background: var(--bg-nav);
-  border-bottom-color: var(--gold-08);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom-color: var(--gold-12);
+  box-shadow: 0 8px 40px rgba(0,0,0,.65);
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
 }
-.wf-logo { flex-shrink: 0; display: flex; align-items: center; -webkit-tap-highlight-color: transparent; }
-.wf-logo img {
-  height: 40px; width: auto;
-  mix-blend-mode: screen;
-  transition: opacity .35s, transform .35s var(--ease-out);
-}
-.wf-logo:hover img { mix-blend-mode: screen; opacity: .85; transform: scale(1.04); }
 
-.wf-nav-desktop { display: flex; align-items: center; gap: clamp(20px,3vw,40px); }
-.wf-nav-link {
-  font-size: 12.5px; letter-spacing: .18em; text-transform: uppercase;
-  color: rgba(245,237,224,.55); position: relative; padding: 6px 0;
-  transition: color .3s;
-}
-.wf-nav-link::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: var(--gold); transform: scaleX(0); transform-origin: left;
-  transition: transform .35s var(--ease-out);
-}
-.wf-nav-link:hover { color: var(--cream); }
-.wf-nav-link:hover::after { transform: scaleX(1); }
-.wf-nav-link.active { color: var(--gold); }
-.wf-nav-link.active::after { transform: scaleX(1); }
-
-.wf-nav-right { display: flex; align-items: center; gap: 24px; }
-.wf-nav-divider { width: 1px; height: 22px; background: var(--gold-12); }
-.wf-nav-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--gold); border: 1px solid var(--gold-25);
-  padding: 11px 22px; transition: background .3s, border-color .3s, color .3s;
+/* ── Logo ── */
+.wf-logo {
+  flex-shrink: 0; display: flex; align-items: center;
   -webkit-tap-highlight-color: transparent;
 }
-.wf-nav-cta:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
-.wf-nav-cta svg { transition: transform .3s var(--ease-out); }
-.wf-nav-cta:hover svg { transform: translateX(3px); }
+.wf-logo img {
+  height: 44px; width: auto;
+  mix-blend-mode: screen;
+  transition: filter .35s, transform .35s var(--ease-out);
+}
+.wf-logo:hover img {
+  mix-blend-mode: screen; opacity: .85;
+  transform: scale(1.04);
+}
 
+/* ── Desktop nav links ── */
+.wf-nav-desktop { display: flex; align-items: center; gap: 4px; }
+.wf-nav-link {
+  position: relative;
+  font-size: 12.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(212,184,150,.5);
+  padding: 8px 18px;
+  transition: color .3s; white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-nav-link::after {
+  content: ''; position: absolute;
+  bottom: 3px; left: 18px; right: 18px; height: 1px;
+  background: var(--gold);
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform .4s var(--ease-out);
+}
+.wf-nav-link.active::before {
+  content: ''; position: absolute;
+  top: 5px; left: 50%; transform: translateX(-50%);
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--gold); opacity: .7;
+}
+.wf-nav-link:hover,
+.wf-nav-link.active { color: var(--gold); }
+.wf-nav-link:hover::after,
+.wf-nav-link.active::after { transform: scaleX(1); }
+
+/* ── Right cluster ── */
+.wf-nav-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+.wf-nav-divider { width: 1px; height: 22px; background: var(--gold-20); }
+.wf-nav-cta {
+  position: relative; overflow: hidden;
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); padding: 10px 26px;
+  border: 1px solid rgba(212,184,150,.3);
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: color .35s, border-color .35s;
+  -webkit-tap-highlight-color: transparent;
+}
+.wf-nav-cta::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: translateX(-101%);
+  transition: transform .45s var(--ease-out); z-index: 0;
+}
+.wf-nav-cta > * { position: relative; z-index: 1; }
+.wf-nav-cta svg { transition: transform .35s var(--ease-out); }
+.wf-nav-cta:hover { color: var(--ink); border-color: var(--gold); }
+.wf-nav-cta:hover::before { transform: translateX(0); }
+.wf-nav-cta:hover svg { transform: translateX(4px); }
+
+/* ── Hamburger ── */
 .wf-hamburger {
-  display: none; background: none; border: none; cursor: pointer;
+  display: none; flex-direction: column;
+  justify-content: center; align-items: flex-end;
+  gap: 5px; padding: 10px;
   width: 44px; height: 44px; min-width: 44px; min-height: 44px;
-  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
-  -webkit-tap-highlight-color: transparent; position: relative; z-index: 101;
+  -webkit-tap-highlight-color: transparent;
 }
 .wf-hamburger span {
-  width: 22px; height: 1.5px; background: var(--cream);
-  transition: transform .3s var(--ease-out), opacity .3s;
+  display: block; height: 1.5px; background: var(--gold); border-radius: 1px;
+  transition: transform .38s var(--ease-out), opacity .3s, width .35s var(--ease-out);
 }
-.wf-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.wf-hamburger.open span:nth-child(2) { opacity: 0; }
-.wf-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.wf-hamburger span:nth-child(1) { width: 24px; }
+.wf-hamburger span:nth-child(2) { width: 16px; }
+.wf-hamburger span:nth-child(3) { width: 20px; }
+.wf-hamburger:hover span { width: 24px !important; }
+.wf-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg);  width: 24px; }
+.wf-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.wf-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 24px; }
 
-/* Mobile drawer */
+/* ── Mobile fullscreen drawer ── */
 #wf-mobile-menu {
-  position: fixed; inset: 0; z-index: 99;
-  background: var(--bg);
-  display: flex; flex-direction: column;
-  padding: calc(var(--nav-h) + var(--safe-t) + 32px) clamp(28px,6vw,56px) max(28px, var(--safe-b));
-  opacity: 0; pointer-events: none;
-  transition: opacity .4s var(--ease-out);
+  position: fixed; inset: 0; z-index: 98;
+  background: rgba(10,9,7,.99);
+  backdrop-filter: blur(32px) saturate(150%);
+  -webkit-backdrop-filter: blur(32px) saturate(150%);
+  display: flex; flex-direction: column; justify-content: center;
+  padding:
+    calc(var(--nav-h) + var(--safe-t) + 40px)
+    max(40px, calc(40px + var(--safe-r)))
+    max(40px, calc(40px + var(--safe-b)))
+    max(40px, calc(40px + var(--safe-l)));
+  pointer-events: none; opacity: 0;
+  transition: opacity .45s var(--ease-out);
 }
 #wf-mobile-menu.open { pointer-events: all; opacity: 1; }
-.wf-mobile-nav { display: flex; flex-direction: column; gap: 4px; }
+.wf-mobile-nav { display: flex; flex-direction: column; }
 .wf-mobile-link {
-  font-size: clamp(28px,7vw,40px); letter-spacing: -.01em;
-  color: var(--cream); padding: 14px 0;
-  border-bottom: 1px solid var(--gold-08);
-  opacity: 0; transform: translateY(16px);
-  transition: opacity .45s var(--ease-out), transform .45s var(--ease-out), color .3s;
+  font-size: clamp(30px, 8.5vw, 54px); letter-spacing: .04em;
+  color: rgba(212,184,150,.2);
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(212,184,150,.06);
+  display: flex; align-items: center; justify-content: space-between;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(22px); opacity: 0;
+  transition: color .3s, transform .55s var(--ease-out), opacity .55s var(--ease-out);
 }
 #wf-mobile-menu.open .wf-mobile-link              { transform: translateY(0); opacity: 1; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(1) { transition-delay: .07s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(2) { transition-delay: .13s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(3) { transition-delay: .19s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(4) { transition-delay: .25s; }
-.wf-mobile-link.active { color: var(--gold); }
+.wf-mobile-link:hover, .wf-mobile-link.active { color: var(--gold); }
 .wf-mobile-cta-wrap {
-  margin-top: 32px;
-  opacity: 0; transform: translateY(16px);
-  transition: opacity .45s var(--ease-out) .3s, transform .45s var(--ease-out) .3s;
+  margin-top: 36px; transform: translateY(20px); opacity: 0;
+  transition: transform .55s var(--ease-out) .31s, opacity .55s var(--ease-out) .31s;
 }
 #wf-mobile-menu.open .wf-mobile-cta-wrap { transform: translateY(0); opacity: 1; }
 .wf-mobile-cta {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 13px; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--ink); background: var(--gold);
-  padding: 16px 28px; width: 100%; justify-content: center;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); padding: 14px 28px;
+  border: 1px solid rgba(212,184,150,.3);
+  transition: background .3s, border-color .3s;
+  -webkit-tap-highlight-color: transparent;
 }
+.wf-mobile-cta:active { background: var(--gold-06); }
 .wf-mobile-footer {
-  margin-top: auto; display: flex; align-items: center; justify-content: space-between;
-  opacity: 0; transition: opacity .4s ease .4s;
+  position: absolute;
+  bottom: max(28px, calc(28px + var(--safe-b)));
+  left:  max(40px, calc(40px + var(--safe-l)));
+  right: max(40px, calc(40px + var(--safe-r)));
+  display: flex; align-items: center; justify-content: space-between;
+  opacity: 0; transition: opacity .55s var(--ease-out) .37s;
 }
 #wf-mobile-menu.open .wf-mobile-footer { opacity: 1; }
 .wf-mobile-footer-text {
-  font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(245,237,224,.3);
+  font-size: 10px; letter-spacing: .24em;
+  text-transform: uppercase; color: rgba(212,184,150,.18);
 }
 .wf-mobile-social-link {
   display: inline-flex; align-items: center; justify-content: center;
   width: 40px; height: 40px; margin: -10px;
   border: 1px solid rgba(212,184,150,.25); border-radius: 50%;
-  color: rgba(245,237,224,.55);
+  color: rgba(212,184,150,.55);
   transition: color .3s var(--ease-out), border-color .3s var(--ease-out), transform .3s var(--ease-out);
   -webkit-tap-highlight-color: transparent;
 }
@@ -199,278 +254,290 @@ a { color: inherit; text-decoration: none; }
 .wf-mobile-social-link:hover, .wf-mobile-social-link:active { color: var(--gold); transform: scale(1.1); }
 
 /* ═══════════════════════════════════════════════
-   HERO — split layout, photo right / content left
+   CONTACT PAGE — MAIN
 ═══════════════════════════════════════════════ */
-.tours-hero {
+.contact-main {
+  padding-top: calc(var(--nav-h) + var(--safe-t));
+  min-height: 100dvh;
   position: relative;
-  display: flex;
-  justify-content: center;
-  min-height: calc(100dvh - var(--nav-h));
-  background: var(--bg);
   overflow: hidden;
 }
 
-.hero-left {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column; justify-content: center;
-  align-items: center; text-align: center;
-  padding: clamp(48px,7vh,80px) clamp(24px,6vw,88px);
-  max-width: 760px;
+/* ── Ambient background glow ── */
+.contact-main::before {
+  content: '';
+  position: absolute;
+  top: 20%; left: -10%;
+  width: 55vw; height: 55vw;
+  background: radial-gradient(ellipse, rgba(212,184,150,.045) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+.contact-main::after {
+  content: '';
+  position: absolute;
+  bottom: 10%; right: -5%;
+  width: 40vw; height: 40vw;
+  background: radial-gradient(ellipse, rgba(212,184,150,.03) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
 }
 
-.hero-kicker {
-  display: inline-flex; align-items: center; gap: 12px;
+/* ── Page header ── */
+.contact-header {
+  position: relative; z-index: 1;
+  padding: clamp(52px,7vh,88px) clamp(24px,5.5vw,72px) clamp(40px,5vh,64px);
+  border-bottom: 1px solid rgba(212,184,150,.08);
+}
+.contact-header-inner {
+  max-width: 780px;
+}
+.contact-eyebrow {
+  display: flex; align-items: center; gap: 14px;
   font-size: 10px; letter-spacing: .36em; text-transform: uppercase;
-  color: var(--gold-55); margin-bottom: 28px;
+  color: rgba(212,184,150,.42);
+  margin-bottom: 20px;
   opacity: 0; transform: translateY(12px);
-  animation: fadeUp .7s var(--ease-out) .15s forwards;
+  animation: cFadeUp .7s var(--ease-out) .1s forwards;
 }
-.hero-kicker-line { width: 26px; height: 1px; background: var(--gold-40); }
-
-.hero-title {
-  font-size: clamp(38px, 5.4vw, 68px);
-  letter-spacing: -.025em; line-height: 1.04; color: var(--cream);
-  margin-bottom: 26px;
-  opacity: 0; transform: translateY(20px);
-  animation: fadeUp .8s var(--ease-out) .28s forwards;
+.contact-eyebrow-dash { display: inline-block; width: 26px; height: 1px; background: rgba(212,184,150,.4); }
+.contact-h1 {
+  font-size: clamp(38px, 6vw, 72px);
+  letter-spacing: -.03em; color: var(--cream); line-height: 1.0;
+  margin-bottom: 20px;
+  opacity: 0; transform: translateY(18px);
+  animation: cFadeUp .8s var(--ease-out) .22s forwards;
 }
-.hero-title em { font-style: italic; color: var(--gold); }
-
-.hero-desc {
-  font-size: clamp(13px, 1.3vw, 15px);
-  color: var(--cream-50); max-width: 460px;
-  line-height: 1.85;
-  margin-bottom: 40px;
-  opacity: 0; transform: translateY(16px);
-  animation: fadeUp .8s var(--ease-out) .42s forwards;
-}
-.hero-desc strong { color: inherit; font-weight: normal; }
-
-.hero-tabs {
-  display: inline-flex; gap: 6px;
+.contact-h1 em { font-style: italic; color: var(--gold); }
+.contact-sub {
+  font-size: clamp(13px,1.5vw,16px); color: rgba(245,237,224,.42);
+  line-height: 1.85; max-width: 480px;
   opacity: 0; transform: translateY(14px);
-  animation: fadeUp .75s var(--ease-out) .56s forwards;
-}
-.hero-tab {
-  font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--cream-35); background: transparent;
-  border: 1px solid var(--gold-12); padding: 11px 20px;
-  cursor: pointer; transition: color .25s, background .25s, border-color .25s;
-  -webkit-tap-highlight-color: transparent; white-space: nowrap;
-}
-.hero-tab:hover  { color: var(--gold-55); border-color: var(--gold-25); }
-.hero-tab.active { color: var(--ink); background: var(--gold); border-color: var(--gold); }
-
-/* ── Stat strip under tabs ── */
-.hero-stats {
-  display: flex; gap: clamp(24px,3vw,44px);
-  margin-top: 48px;
-  opacity: 0; transform: translateY(14px);
-  animation: fadeUp .75s var(--ease-out) .7s forwards;
-}
-.hero-stat-num {
-  font-size: clamp(20px,2vw,26px); color: var(--gold); line-height: 1;
-  margin-bottom: 5px;
-}
-.hero-stat-label {
-  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--cream-35);
+  animation: cFadeUp .75s var(--ease-out) .36s forwards;
 }
 
-
-@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-/* ═══════════════════════════════════════════════
-   MAIN CONTENT
-═══════════════════════════════════════════════ */
-.tours-main {
-  max-width: 1280px; margin: 0 auto;
-  padding: clamp(64px,9vh,104px) clamp(24px,5.5vw,72px);
-}
-
-.tours-section { }
-.tours-section-header {
-  display: flex; align-items: baseline; gap: 20px;
-  margin-bottom: 14px; flex-wrap: wrap;
-}
-.tours-section-eyebrow {
-  font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--gold-55);
-}
-.tours-section-h2 {
-  font-size: clamp(28px,3.4vw,42px); letter-spacing: -.02em; color: var(--cream);
-}
-.tours-section-rule {
-  flex: 1; height: 1px; background: var(--gold-08); min-width: 40px;
-}
-
-.season-note {
-  font-size: 13px; color: var(--cream-35); line-height: 1.7;
-  max-width: 680px; margin-bottom: 44px;
-}
-.season-note strong { color: var(--gold-55); font-weight: normal; }
-
-/* ── Destination cards — new design: card grid, not rows ── */
-.dest-grid {
+/* ── Two-column layout ── */
+.contact-body {
+  position: relative; z-index: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--gold-08);
-  margin-bottom: 28px;
+  grid-template-columns: 1fr 1.45fr;
+  gap: 0;
+  min-height: calc(100dvh - var(--nav-h) - 260px);
 }
 
-.dest-card {
-  position: relative; background: var(--bg-card);
-  display: flex; flex-direction: column;
-  cursor: pointer;
-  transition: background .3s;
-}
-.dest-card:hover { background: var(--bg-card-2); }
-
-.dest-card-img {
-  position: relative; aspect-ratio: 4/3; overflow: hidden;
-}
-.dest-card-img img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(8%) contrast(1.05) brightness(.78);
-  transition: transform .6s var(--ease-out), filter .4s;
-}
-.dest-card:hover .dest-card-img img { transform: scale(1.08); filter: grayscale(0%) contrast(1.08) brightness(.9); }
-.dest-card-img-grad {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 50%, rgba(19,17,14,.9) 100%);
-}
-.dest-card-num {
-  position: absolute; top: 14px; left: 16px; z-index: 2;
-  font-size: 11px; letter-spacing: .15em; color: rgba(245,237,224,.55);
-}
-.dest-card-badge {
-  position: absolute; top: 14px; right: 16px; z-index: 2;
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--gold); background: rgba(13,13,10,.65);
-  padding: 6px 11px; border: 1px solid var(--gold-25);
-  backdrop-filter: blur(4px);
-}
-.live-dot, .upcoming-dot {
-  width: 5px; height: 5px; border-radius: 50%; display: inline-block;
-  background: var(--gold);
-}
-.live-dot { animation: pulseDot 1.8s ease-in-out infinite; }
-@keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
-
-.dest-card-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; }
-.dest-card-name {
-  font-size: 21px; letter-spacing: -.015em; color: var(--cream); margin-bottom: 4px;
-}
-.dest-card-name em { font-style: italic; color: var(--gold-55); }
-.dest-card-loc {
-  font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--cream-35); margin-bottom: 14px;
-}
-.dest-card-desc {
-  font-size: 12.5px; color: var(--cream-50); line-height: 1.7;
-  flex: 1; margin-bottom: 18px;
-}
-.dest-card-foot {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 14px; border-top: 1px solid var(--gold-06);
-}
-.dest-card-status {
-  font-size: 11px; letter-spacing: .08em; color: var(--gold-55);
-  display: inline-flex; align-items: center; gap: 7px;
-}
-.dest-card-arrow {
-  font-size: 14px; color: var(--gold-40);
-  transition: transform .3s var(--ease-out);
-}
-.dest-card:hover .dest-card-arrow { transform: translateX(4px); color: var(--gold); }
-
-/* ── On the horizon — redesigned as inline ticker strip ── */
-.horizon-strip {
-  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-  padding: 22px clamp(20px,3vw,32px);
-  border: 1px solid var(--gold-08); background: var(--bg-card);
-}
-.horizon-label {
-  font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
-  color: var(--cream-35); white-space: nowrap;
-}
-.horizon-list { display: flex; gap: 10px; flex-wrap: wrap; flex: 1; }
-.horizon-tag {
-  font-size: 11px; letter-spacing: .06em; color: var(--cream-50);
-  padding: 7px 14px; border: 1px solid var(--gold-08);
-  transition: color .25s, border-color .25s;
-}
-.horizon-tag:hover { color: var(--gold); border-color: var(--gold-25); }
-
-.section-sep {
-  height: 1px; background: var(--gold-08); margin: 72px 0;
+/* ────────────────────────────
+   LEFT PANEL — info
+──────────────────────────── */
+.contact-info {
+  padding: clamp(40px,5vh,64px) clamp(24px,5.5vw,64px);
+  border-right: 1px solid rgba(212,184,150,.08);
+  display: flex; flex-direction: column; gap: 48px;
 }
 
-/* ── Birding card — redesigned ── */
-.birding-soon-card {
-  display: flex; align-items: center; justify-content: space-between; gap: 32px;
-  flex-wrap: wrap;
-  padding: clamp(32px,5vh,52px) clamp(28px,4vw,48px);
-  border: 1px solid var(--gold-12); background: var(--bg-card);
-  position: relative; overflow: hidden;
+/* ── Info group ── */
+.info-group { display: flex; flex-direction: column; gap: 24px; }
+.info-group-label {
+  font-size: 9px; letter-spacing: .38em; text-transform: uppercase;
+  color: rgba(212,184,150,.35); font-style: italic;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212,184,150,.08);
 }
-.birding-soon-card::before {
-  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
-  background: var(--gold);
-}
-.birding-soon-left { display: flex; flex-direction: column; gap: 10px; max-width: 560px; }
-.birding-soon-tag {
-  font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-55);
-}
-.birding-soon-title { font-size: clamp(20px,2.4vw,28px); color: var(--cream); letter-spacing: -.01em; }
-.birding-soon-title em { font-style: italic; color: var(--gold); }
-.birding-soon-desc { font-size: 13px; color: var(--cream-50); line-height: 1.75; }
-.birding-soon-cta {
-  display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;
-  font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--ink); background: var(--gold);
-  padding: 15px 28px; transition: background .3s, transform .3s var(--ease-out);
-}
-.birding-soon-cta:hover { background: var(--cream); transform: translateY(-2px); }
-.birding-soon-cta svg { transition: transform .3s var(--ease-out); }
-.birding-soon-cta:hover svg { transform: translateX(3px); }
 
-/* ── Bottom CTA ── */
-.tours-cta {
-  position: relative; text-align: center;
-  padding: clamp(56px,8vh,88px) 0 0;
-  margin-top: 56px;
-  border-top: 1px solid var(--gold-08);
+/* ── Contact item ── */
+.contact-item {
+  display: flex; align-items: flex-start; gap: 16px;
 }
-.tours-cta-eyebrow {
-  font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--gold-55); margin-bottom: 16px;
+.contact-item-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border: 1px solid rgba(212,184,150,.2);
+  background: rgba(212,184,150,.04);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color .3s, background .3s;
 }
-.tours-cta-heading {
-  font-size: clamp(24px,3.2vw,36px); color: var(--cream); margin-bottom: 14px; letter-spacing: -.015em;
+.contact-item:hover .contact-item-icon {
+  border-color: rgba(212,184,150,.45);
+  background: rgba(212,184,150,.08);
 }
-.tours-cta-sub {
-  font-size: 13.5px; color: var(--cream-50); line-height: 1.8;
-  max-width: 460px; margin: 0 auto 32px;
+.contact-item-icon svg { display: block; }
+.contact-item-text { display: flex; flex-direction: column; gap: 3px; }
+.contact-item-label {
+  font-size: 9px; letter-spacing: .28em; text-transform: uppercase;
+  color: rgba(212,184,150,.35); font-style: italic;
 }
-.tours-cta-btn {
-  display: inline-flex; align-items: center; gap: 10px;
+.contact-item-value {
+  font-size: 14px; color: rgba(245,237,224,.7);
+  transition: color .3s; letter-spacing: .02em;
+}
+a.contact-item:hover .contact-item-value { color: var(--gold); }
+
+/* ── WhatsApp CTA ── */
+.wa-btn {
+  display: inline-flex; align-items: center; gap: 12px;
   font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold); border: 1px solid var(--gold-25);
-  padding: 16px 34px; transition: background .3s, color .3s, border-color .3s;
+  color: var(--gold); padding: 13px 24px;
+  border: 1px solid rgba(212,184,150,.28);
+  background: rgba(212,184,150,.04);
+  position: relative; overflow: hidden;
+  transition: color .35s, border-color .35s;
+  -webkit-tap-highlight-color: transparent;
+  align-self: flex-start;
 }
-.tours-cta-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
-.tours-cta-btn svg { transition: transform .3s var(--ease-out); }
-.tours-cta-btn:hover svg { transform: translateX(4px); }
+.wa-btn::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: translateX(-101%); transition: transform .45s var(--ease-out); z-index: 0;
+}
+.wa-btn > * { position: relative; z-index: 1; }
+.wa-btn svg { transition: transform .3s var(--ease-out); }
+.wa-btn:hover { color: var(--ink); border-color: var(--gold); }
+.wa-btn:hover::before { transform: translateX(0); }
+.wa-btn:hover svg { transform: translateX(3px); }
+
+/* ── Subtle vertical rule decoration ── */
+.info-rule {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(212,184,150,.2), transparent);
+  margin: 4px 0 4px 17px;
+}
+
+/* ────────────────────────────
+   RIGHT PANEL — form
+──────────────────────────── */
+.contact-form-wrap {
+  padding: clamp(40px,5vh,64px) clamp(24px,5.5vw,64px);
+  display: flex; flex-direction: column;
+}
+.form-heading {
+  font-size: 11px; letter-spacing: .32em; text-transform: uppercase;
+  color: rgba(212,184,150,.35); font-style: italic;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(212,184,150,.08);
+}
+
+/* ── Form ── */
+.contact-form {
+  display: flex; flex-direction: column; gap: 20px; flex: 1;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-field { display: flex; flex-direction: column; gap: 7px; }
+.form-label {
+  font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+  color: rgba(212,184,150,.38); font-style: italic;
+}
+.form-input,
+.form-textarea {
+  background: rgba(212,184,150,.04);
+  border: 1px solid rgba(212,184,150,.16);
+  color: var(--cream);
+  font-family: 'Neuzon', sans-serif;
+  font-size: 14px; letter-spacing: .02em;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color .3s, background .3s;
+  width: 100%;
+  -webkit-appearance: none;
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(245,237,224,.2);
+  font-style: italic;
+}
+.form-input:focus,
+.form-textarea:focus {
+  border-color: rgba(212,184,150,.55);
+  background: rgba(212,184,150,.06);
+}
+.form-textarea { resize: none; min-height: 120px; line-height: 1.7; }
+
+/* Interest selector */
+.form-interest-label {
+  font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase;
+  color: rgba(212,184,150,.38); font-style: italic;
+  margin-bottom: 7px;
+}
+.interest-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.interest-chip {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(212,184,150,.4);
+  padding: 7px 16px;
+  border: 1px solid rgba(212,184,150,.16);
+  background: transparent;
+  cursor: pointer;
+  transition: color .28s, border-color .28s, background .28s;
+  -webkit-tap-highlight-color: transparent;
+}
+.interest-chip:hover { color: rgba(212,184,150,.75); border-color: rgba(212,184,150,.38); }
+.interest-chip.selected {
+  color: var(--gold);
+  border-color: rgba(212,184,150,.55);
+  background: rgba(212,184,150,.07);
+}
+
+/* Divider */
+.form-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(212,184,150,.14), transparent);
+  margin: 4px 0;
+}
+
+/* Submit */
+.form-submit {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  font-family: 'Neuzon', sans-serif;
+  font-size: 12px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--gold); padding: 16px 32px;
+  border: 1px solid rgba(212,184,150,.32);
+  background: rgba(212,184,150,.05);
+  cursor: pointer;
+  transition: color .35s, border-color .35s;
+  align-self: flex-start;
+  min-width: 200px;
+  -webkit-tap-highlight-color: transparent;
+}
+.form-submit::before {
+  content: ''; position: absolute; inset: 0; background: var(--gold);
+  transform: translateX(-101%); transition: transform .45s var(--ease-out); z-index: 0;
+}
+.form-submit > * { position: relative; z-index: 1; }
+.form-submit svg { transition: transform .35s var(--ease-out); }
+.form-submit:hover { color: var(--ink); border-color: var(--gold); }
+.form-submit:hover::before { transform: translateX(0); }
+.form-submit:hover svg { transform: translateX(4px); }
+
+/* Success state */
+.form-submit.sent {
+  color: var(--gold); border-color: rgba(212,184,150,.4);
+  background: rgba(212,184,150,.06); pointer-events: none;
+}
+.form-submit.sent::before { transform: translateX(0); background: rgba(212,184,150,.08); }
+
+/* ── Scroll reveal ── */
+.c-reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .65s var(--ease-out), transform .65s var(--ease-out);
+}
+.c-reveal.visible { opacity: 1; transform: translateY(0); }
+.c-d1 { transition-delay: .06s; }
+.c-d2 { transition-delay: .12s; }
+.c-d3 { transition-delay: .18s; }
+.c-d4 { transition-delay: .24s; }
+
+/* ── Animations ── */
+@keyframes cFadeUp { to { opacity: 1; transform: translateY(0); } }
 
 /* ═══════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════ */
 .wf-footer {
-  position: relative; background: var(--bg);
+  position: relative;
+  background: var(--bg);
   border-top: 1px solid var(--gold-12);
+  z-index: 1;
   text-align: center;
 }
 .wf-footer::before {
@@ -493,7 +560,7 @@ a { color: inherit; text-decoration: none; }
 .footer-brand-kicker {
   margin-top: 14px;
   font-size: 9.5px; letter-spacing: .34em; text-transform: uppercase;
-  color: var(--gold-28, rgba(212,184,150,.32));
+  color: rgba(212,184,150,.32);
 }
 .footer-divider {
   position: relative;
@@ -516,10 +583,12 @@ a { color: inherit; text-decoration: none; }
 }
 .footer-nav-row a {
   font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--cream-35); padding: 0 clamp(12px,2vw,20px);
-  transition: color .3s; -webkit-tap-highlight-color: transparent;
+  color: rgba(245,237,224,.42);
+  padding: 0 clamp(12px,2vw,20px);
+  transition: color .3s;
+  -webkit-tap-highlight-color: transparent;
 }
-.footer-nav-row a:not(:last-child) { border-right: 1px solid var(--gold-08); }
+.footer-nav-row a:not(:last-child) { border-right: 1px solid rgba(212,184,150,.14); }
 .footer-nav-row a:hover, .footer-nav-row a.active { color: var(--gold); }
 .footer-info-row {
   display: flex; align-items: center; justify-content: center;
@@ -528,7 +597,8 @@ a { color: inherit; text-decoration: none; }
 }
 .footer-info-row a {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px; letter-spacing: .02em; color: var(--cream-50);
+  font-size: 12px; letter-spacing: .02em;
+  color: rgba(245,237,224,.44);
   transition: color .3s; -webkit-tap-highlight-color: transparent;
 }
 .footer-info-row a svg { opacity: .55; transition: opacity .3s; flex-shrink: 0; }
@@ -558,21 +628,20 @@ a { color: inherit; text-decoration: none; }
 }
 .footer-social-block:hover .footer-social-handle { color: var(--gold); }
 .footer-bottom {
-  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
-  gap: 6px 18px;
-  padding: clamp(16px,2vh,20px) clamp(24px,5.5vw,72px)
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 6px 18px;
+  padding: clamp(16px,2vh,20px) clamp(24px,6vw,96px)
            max(clamp(16px,2vh,20px), calc(clamp(16px,2vh,20px) + var(--safe-b)));
-  border-top: 1px solid var(--gold-08);
+  border-top: 1px solid rgba(212,184,150,.08);
 }
-.footer-bottom-copy {
-  font-size: 10px; letter-spacing: .1em; font-style: italic; color: rgba(212,184,150,.24);
-}
+.footer-bottom-copy { font-size: 10px; letter-spacing: .1em; font-style: italic; color: rgba(212,184,150,.24); }
 .footer-bottom-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(212,184,150,.2); }
 .footer-back-top {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(212,184,150,.3); cursor: pointer; background: none; border: none;
-  transition: color .35s var(--ease-out);
+  color: rgba(212,184,150,.3);
+  cursor: pointer; background: none; border: none;
+  transition: color .3s; -webkit-tap-highlight-color: transparent;
 }
 .footer-back-top:hover { color: var(--gold); }
 .footer-back-top svg { transition: transform .35s var(--ease-out); }
@@ -588,68 +657,27 @@ a { color: inherit; text-decoration: none; }
   .footer-brand-logo { height: 34px; }
 }
 
-
 /* ═══════════════════════════════════════════════
-   COMING SOON MODAL
-═══════════════════════════════════════════════ */
-#cs-modal {
-  position: fixed; inset: 0; z-index: 300;
-  background: rgba(13,13,10,.86); backdrop-filter: blur(6px);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity .35s var(--ease-out);
-  padding: 20px;
-}
-#cs-modal.open { opacity: 1; pointer-events: all; }
-.cs-box {
-  position: relative; background: var(--bg-card);
-  border: 1px solid var(--gold-20);
-  padding: clamp(36px,5vw,52px) clamp(28px,4vw,44px);
-  text-align: center; max-width: 400px; width: 92%;
-  transform: scale(.94) translateY(10px); transition: transform .35s var(--ease-out);
-}
-#cs-modal.open .cs-box { transform: scale(1) translateY(0); }
-.cs-close {
-  position: absolute; top: 14px; right: 14px;
-  width: 32px; height: 32px; background: none; border: none;
-  color: var(--cream-35); font-size: 16px; cursor: pointer;
-  transition: color .25s;
-}
-.cs-close:hover { color: var(--gold); }
-.cs-logo { height: 30px; width: auto; margin: 0 auto 20px; mix-blend-mode: screen; }
-.cs-divider { width: 36px; height: 1px; background: var(--gold-25); margin: 0 auto 20px; }
-.cs-tag {
-  font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-  color: var(--gold-55); margin-bottom: 10px;
-}
-.cs-name { font-size: 24px; color: var(--cream); margin-bottom: 14px; letter-spacing: -.01em; }
-.cs-desc { font-size: 13px; color: var(--cream-50); line-height: 1.75; margin-bottom: 22px; }
-.cs-sep { width: 100%; height: 1px; background: var(--gold-08); margin-bottom: 22px; }
-.cs-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--gold); transition: color .25s;
-}
-.cs-link:hover { color: var(--cream); }
-.cs-link svg { transition: transform .3s var(--ease-out); }
-.cs-link:hover svg { transform: translateX(3px); }
-
-/* ═══════════════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════════════ */
-.t-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
-.t-reveal.visible { opacity: 1; transform: translateY(0); }
-.t-d1 { transition-delay: .05s; } .t-d2 { transition-delay: .1s; }
-.t-d3 { transition-delay: .15s; } .t-d4 { transition-delay: .2s; }
-
-/* ═══════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — Tablet ≤ 900px
 ═══════════════════════════════════════════════ */
 @media (max-width: 900px) {
-  .tours-hero { min-height: auto; }
-  .hero-left { padding: clamp(36px,6vh,56px) clamp(24px,5vw,48px); }
-  .dest-grid { grid-template-columns: repeat(2, 1fr); }
+  :root { --nav-h: 68px; }
+  #wf-nav {
+    padding-left:  max(24px, calc(24px + var(--safe-l)));
+    padding-right: max(24px, calc(24px + var(--safe-r)));
+  }
+  .wf-nav-desktop, .wf-nav-right { display: none !important; }
+  .wf-hamburger { display: flex; }
+  .wf-logo img  { height: 38px; }
+
+  .contact-body { grid-template-columns: 1fr; }
+  .contact-info { border-right: none; border-bottom: 1px solid rgba(212,184,150,.08); }
+  .form-row { grid-template-columns: 1fr 1fr; }
 }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — Mobile ≤ 600px
+═══════════════════════════════════════════════ */
 @media (max-width: 600px) {
   :root { --nav-h: 62px; }
   #wf-nav {
@@ -657,26 +685,63 @@ a { color: inherit; text-decoration: none; }
     padding-right: max(18px, calc(18px + var(--safe-r)));
   }
   .wf-logo img { height: 32px; }
-  .wf-nav-desktop, .wf-nav-divider { display: none; }
-  .wf-nav-cta { display: none; }
-  .wf-hamburger { display: flex; }
 
-  .hero-stats { gap: 24px; }
-  .hero-tabs { flex-wrap: wrap; width: 100%; }
-  .hero-tab { flex: 1 1 auto; text-align: center; }
+  .contact-header { padding: 36px max(20px, calc(18px + var(--safe-l))) 28px; }
+  .contact-info { padding: 32px max(20px, calc(18px + var(--safe-l))); }
+  .contact-form-wrap { padding: 32px max(20px, calc(18px + var(--safe-l))); }
+  .form-row { grid-template-columns: 1fr; }
+}
 
-  .tours-main { padding: clamp(48px,7vh,72px) max(20px, calc(18px + var(--safe-l))); }
-  .dest-grid { grid-template-columns: 1fr; }
-  .horizon-strip { flex-direction: column; align-items: flex-start; }
-  .birding-soon-card { flex-direction: column; align-items: flex-start; }
-  .birding-soon-cta { width: 100%; justify-content: center; }
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — iPhone SE ≤ 374px
+═══════════════════════════════════════════════ */
+@media (max-width: 374px) {
+  :root { --nav-h: 58px; }
+  .wf-logo img  { height: 28px; }
+  .wf-mobile-link { font-size: clamp(26px, 9vw, 38px); }
+  .footer-brand-logo { height: 30px; }
 }
-@media (max-width: 700px) {
-  .wf-nav-desktop, .wf-nav-divider, .wf-nav-cta { display: none; }
-  .wf-hamburger { display: flex; }
-}
+
+/* Desktop nav always visible */
 @media (min-width: 901px) { #wf-mobile-menu { display: none !important; } }
 
+
+  /* ── Coming-soon social icons ── */
+  .social-coming-soon {
+    position: relative;
+    opacity: 0.32;
+    cursor: not-allowed;
+    pointer-events: none; /* blocks click */
+  }
+  /* Re-enable pointer-events so tooltip can appear on touch/desktop */
+  .social-coming-soon-wrap {
+    position: relative;
+    display: inline-flex;
+    cursor: not-allowed;
+  }
+  .social-coming-soon-wrap::after {
+    content: "Coming soon";
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20,14,8,.85);
+    color: #D4B896;
+    font-size: 10px;
+    font-family: 'Neuzon', serif;
+    letter-spacing: .06em;
+    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(212,184,150,.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 999;
+  }
+  .social-coming-soon-wrap:hover::after {
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
@@ -695,13 +760,13 @@ a { color: inherit; text-decoration: none; }
   <nav class="wf-nav-desktop" aria-label="Primary navigation">
     <a class="wf-nav-link"        href="index.html">Home</a>
     <a class="wf-nav-link"        href="about.html">About Us</a>
-    <a class="wf-nav-link active" href="Tours_Page.html">Tours</a>
-    <a class="wf-nav-link"        href="Contact_Page.html">Contact Us</a>
+    <a class="wf-nav-link"        href="Tours_Page.html">Tours</a>
+    <a class="wf-nav-link active" href="Contact_Page.html">Contact Us</a>
   </nav>
 
   <div class="wf-nav-right">
     <div class="wf-nav-divider" aria-hidden="true"></div>
-    <a class="wf-nav-cta" href="Contact_Page.html" aria-label="Book a safari">
+    <a class="wf-nav-cta" href="#contact-form" aria-label="Book a safari">
       <span>Book a Safari</span>
       <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
         <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
@@ -711,8 +776,10 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <button class="wf-hamburger" id="wf-hamburger"
-          aria-label="Toggle navigation menu" aria-expanded="false"
-          aria-controls="wf-mobile-menu" onclick="toggleMobileMenu()">
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="wf-mobile-menu"
+          onclick="toggleMobileMenu()">
     <span></span><span></span><span></span>
   </button>
 
@@ -723,12 +790,11 @@ a { color: inherit; text-decoration: none; }
   <div class="wf-mobile-nav">
     <a class="wf-mobile-link"        href="index.html">Home</a>
     <a class="wf-mobile-link"        href="about.html">About Us</a>
-    <a class="wf-mobile-link active" href="Tours_Page.html">Tours</a>
-    <a class="wf-mobile-link"        href="Contact_Page.html">Contact Us</a>
+    <a class="wf-mobile-link"        href="Tours_Page.html">Tours</a>
+    <a class="wf-mobile-link active" href="Contact_Page.html">Contact Us</a>
   </div>
-
   <div class="wf-mobile-cta-wrap">
-    <a class="wf-mobile-cta" href="Contact_Page.html" aria-label="Book a safari" onclick="toggleMobileMenu()">
+    <a class="wf-mobile-cta" href="#contact-form" aria-label="Book a safari" onclick="toggleMobileMenu()">
       Book a Safari
       <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
         <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
@@ -750,183 +816,194 @@ a { color: inherit; text-decoration: none; }
 
 
 <!-- ══════════════════════════════════════════════
-     HERO — split: content left, photo right
+     CONTACT MAIN
 ══════════════════════════════════════════════ -->
-<section class="tours-hero" id="tours-hero" aria-label="WildFellas Expeditions Hero">
+<main class="contact-main" id="contact-form">
 
-  <div class="hero-left">
-
-    <p class="hero-kicker">
-      <span class="hero-kicker-line" aria-hidden="true"></span>
-      WildFellas Expeditions
-      <span class="hero-kicker-line" aria-hidden="true"></span>
-    </p>
-
-    <h1 class="hero-title">
-      Where Every Trail<br>
-      Tells a <em>Story.</em>
-    </h1>
-
-    <p class="hero-desc">
-      We began where India's tiger stories are written, Pench Tiger Reserve.
-      October onwards, the wild opens up.
-    </p>
-
-    <div class="hero-tabs" role="tablist" aria-label="Filter expeditions by type">
-      <button class="hero-tab active" role="tab" aria-selected="true"
-              onclick="filterSection('all', this)">All Expeditions</button>
-      <button class="hero-tab" role="tab" aria-selected="false"
-              onclick="filterSection('tiger', this)">Tiger Safaris</button>
-      <button class="hero-tab" role="tab" aria-selected="false"
-              onclick="filterSection('birding', this)">Birding Trips</button>
+  <!-- ── Page header ── -->
+  <div class="contact-header">
+    <div class="contact-header-inner">
+      <p class="contact-eyebrow">
+        <span class="contact-eyebrow-dash" aria-hidden="true"></span>
+        Get In Touch
+      </p>
+      <h1 class="contact-h1">
+        Let's Start Your
+        <em>Journey.</em>
+      </h1>
+      <p class="contact-sub">
+        Whether you're planning your first expedition or returning for a
+        new wilderness — we're here to guide the way.
+      </p>
     </div>
-
   </div>
 
-</section>
+  <!-- ── Two-column body ── -->
+  <div class="contact-body">
 
+    <!-- ─── LEFT: Contact info ─── -->
+    <aside class="contact-info">
 
-<!-- ══════════════════════════════════════════════
-     MAIN CONTENT
-══════════════════════════════════════════════ -->
-<main class="tours-main" id="tours-main">
+      <!-- Direct contact -->
+      <div class="info-group c-reveal c-d1">
+        <p class="info-group-label">Direct Contact</p>
 
-  <!-- ════════ TIGER SAFARIS ════════ -->
-  <div id="tiger-section" data-section="tiger" class="tours-section t-reveal">
+        <a class="contact-item" href="mailto:hey@gowildfellas.com" aria-label="Email us">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Email</span>
+            <span class="contact-item-value">hey@gowildfellas.com</span>
+          </div>
+        </a>
 
-    <div class="tours-section-header">
-      <p class="tours-section-eyebrow">Signature Expeditions</p>
-      <h2 class="tours-section-h2">Tiger Safaris</h2>
-      <div class="tours-section-rule" aria-hidden="true"></div>
-    </div>
+        <div class="info-rule" aria-hidden="true"></div>
 
-    <p class="season-note t-reveal t-d1">
-      <strong>The season begins October 2026.</strong>
-      Watch this space, Panna and Tadoba are next.
-    </p>
+        <a class="contact-item" href="tel:+919970004812" aria-label="Call us">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.1 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Phone</span>
+            <span class="contact-item-value">+91 88559 40100</span>
+          </div>
+        </a>
 
-    <div class="dest-grid">
+        <div class="info-rule" aria-hidden="true"></div>
 
-      <!-- Pench — ACTIVE -->
-      <div class="dest-card t-reveal t-d1" onclick="location.href='Contact_Page.html'"
-           role="button" tabindex="0" aria-label="Pench Tiger Reserve — Book Now">
-        <div class="dest-card-img">
-          <img src="assets/images/Pench02.jpg" alt="Leopard resting on a tree in Pench forest — WildFellas" loading="lazy"/>
-          <div class="dest-card-img-grad" aria-hidden="true"></div>
-          <span class="dest-card-badge"><span class="live-dot" aria-hidden="true"></span>Dates Announcing Soon</span>
-        </div>
-        <div class="dest-card-body">
-          <h3 class="dest-card-name">Pench <em>Tiger Reserve</em></h3>
-          <p class="dest-card-loc">Madhya Pradesh · Maharashtra Border</p>
-          <p class="dest-card-desc">The landscape that inspired The Jungle Book. Our home ground. October 2026 onwards.</p>
-          <div class="dest-card-foot">
-            <span class="dest-card-status">Register Interest</span>
-            <span class="dest-card-arrow" aria-hidden="true">→</span>
+        <a class="contact-item" href="https://instagram.com/gowildfellas"
+           target="_blank" rel="noopener noreferrer" aria-label="WildFellas on Instagram">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="var(--gold)" stroke="none"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Instagram</span>
+            <span class="contact-item-value">@gowildfellas</span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Location -->
+      <div class="info-group c-reveal c-d2">
+        <p class="info-group-label">Based In</p>
+        <div class="contact-item">
+          <div class="contact-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Location</span>
+            <span class="contact-item-value">Pune, Maharashtra, India</span>
           </div>
         </div>
       </div>
 
-      <!-- Panna — Oct 2026 -->
-      <div class="dest-card t-reveal t-d2" onclick="openModal('Panna Tiger Reserve')"
-           role="button" tabindex="0" aria-label="Panna Tiger Reserve">
-        <div class="dest-card-img">
-          <img src="assets/images/Panna01.jpg" alt="Panna Tiger Reserve — WildFellas" loading="lazy"/>
-          <div class="dest-card-img-grad" aria-hidden="true"></div>
-        </div>
-        <div class="dest-card-body">
-          <h3 class="dest-card-name">Panna <em>Tiger Reserve</em></h3>
-          <p class="dest-card-loc">Madhya Pradesh</p>
-          <p class="dest-card-desc">Ken river gorges, pristine forests, and a tiger comeback story like no other. A hidden gem of central India.</p>
-          <div class="dest-card-foot">
-            <span class="dest-card-status"><span class="upcoming-dot" aria-hidden="true"></span>Oct 2026</span>
-            <span class="dest-card-arrow" aria-hidden="true">→</span>
+      <!-- WhatsApp -->
+      <div class="c-reveal c-d3">
+        <a class="wa-btn" href="https://wa.me/919970004812"
+           target="_blank" rel="noopener" aria-label="Start WhatsApp chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          <span>WhatsApp Us</span>
+          <svg viewBox="0 0 16 16" fill="none" width="10" height="10" aria-hidden="true">
+            <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- ─── RIGHT: Form ─── -->
+    <section class="contact-form-wrap c-reveal c-d1" aria-label="Inquiry form">
+
+      <p class="form-heading">Send an Inquiry</p>
+
+      <form class="contact-form" id="inquiry-form" novalidate>
+        <input type="hidden" name="access_key"
+         value="3a716d8d-0d5c-40cd-80cf-90706bab28d4">
+
+<input type="hidden" name="subject"
+       value="🦁 New WildFellas Safari Inquiry">
+
+  <input type="hidden" name="from_name"
+         value="WildFellas Website">
+
+        <!-- Name + Phone -->
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="f-name">Full Name</label>
+            <input class="form-input" type="text" id="f-name" name="name"
+                   placeholder="Your name" autocomplete="name" required/>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="f-phone">Phone</label>
+            <input class="form-input" type="tel" id="f-phone" name="phone"
+                   placeholder="+91" autocomplete="tel"/>
           </div>
         </div>
-      </div>
 
-      <!-- Tadoba — Oct 2026 -->
-      <div class="dest-card t-reveal t-d3" onclick="openModal('Tadoba Tiger Reserve')"
-           role="button" tabindex="0" aria-label="Tadoba Tiger Reserve">
-        <div class="dest-card-img">
-          <img src="assets/images/tadoba.jpg" alt="Two tigers in Tadoba forest — WildFellas" loading="lazy" style="filter: brightness(1.25) contrast(1.08) saturate(1.2) sepia(5%);"/>
-          <div class="dest-card-img-grad" aria-hidden="true"></div>
+        <!-- Email -->
+        <div class="form-field">
+          <label class="form-label" for="f-email">Email</label>
+          <input class="form-input" type="email" id="f-email" name="email"
+                 placeholder="explorer@wilderness.com" autocomplete="email" required/>
         </div>
-        <div class="dest-card-body">
-          <h3 class="dest-card-name">Tadoba <em>Tiger Reserve</em></h3>
-          <p class="dest-card-loc">Maharashtra</p>
-          <p class="dest-card-desc">Maharashtra's oldest reserve. Open meadows, dry deciduous forest, and one of India's highest tiger densities.</p>
-          <div class="dest-card-foot">
-            <span class="dest-card-status"><span class="upcoming-dot" aria-hidden="true"></span>Oct 2026</span>
-            <span class="dest-card-arrow" aria-hidden="true">→</span>
+
+        <!-- Interest -->
+        <div class="form-field">
+          <p class="form-label form-interest-label">I'm interested in</p>
+          <div class="interest-chips" role="group" aria-label="Trip type">
+            <button type="button" class="interest-chip" data-value="Tiger Safaris">Tiger Safaris</button>
+            <button type="button" class="interest-chip" data-value="Birdwatching">Birdwatching</button>
+            <button type="button" class="interest-chip" data-value="Herping">Herping</button>
+            <button type="button" class="interest-chip" data-value="Custom Trip">Custom Trip</button>
           </div>
+          <input type="hidden" name="interest" id="f-interest" value=""/>
         </div>
-      </div>
 
-    </div>
+        <!-- Message -->
+        <div class="form-field">
+          <label class="form-label" for="f-message">Message</label>
+          <textarea class="form-textarea" id="f-message" name="message"
+                    placeholder="Tell us about your dream expedition — destination, dates, group size..."
+                    rows="5" required></textarea>
+        </div>
 
-    <!-- On the horizon -->
-    <div class="horizon-strip t-reveal t-d4">
-      <p class="horizon-label">On the Horizon</p>
-      <div class="horizon-list">
-        <span class="horizon-tag">Bandhavgarh</span>
-        <span class="horizon-tag">Kanha</span>
-        <span class="horizon-tag">Dudhwa</span>
-        <span class="horizon-tag">Pilibhit</span>
-        <span class="horizon-tag">Jim Corbett</span>
-        <span class="horizon-tag">Gothangaon</span>
-        <span class="horizon-tag">Rajaji</span>
-      </div>
-    </div>
+        <div class="form-divider" aria-hidden="true"></div>
 
-  </div>
+        <!-- Submit -->
+        <button class="form-submit" type="submit" id="form-submit">
+          <span id="submit-label">Send Inquiry</span>
+          <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true" id="submit-icon">
+            <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
 
-  <div class="section-sep" aria-hidden="true"></div>
+      </form>
 
-  <!-- ════════ BIRDING ════════ -->
-  <div id="birding-section" data-section="birding" class="tours-section t-reveal">
+    </section>
 
-    <div class="tours-section-header">
-      <p class="tours-section-eyebrow">Coming Soon</p>
-      <h2 class="tours-section-h2">Birding Trips</h2>
-      <div class="tours-section-rule" aria-hidden="true"></div>
-    </div>
-
-    <div class="birding-soon-card t-reveal t-d1">
-      <div class="birding-soon-left">
-        <p class="birding-soon-tag">Starting Soon</p>
-        <h3 class="birding-soon-title">Birding Trips, <em>Launching Soon</em></h3>
-        <p class="birding-soon-desc">
-          From Western Ghats monsoon birding to wetland flamingos, we are putting together
-          curated, expert-led birding experiences. Be the first to know when dates are live.
-        </p>
-      </div>
-      <a class="birding-soon-cta" href="Contact_Page.html">
-        <span>Notify Me</span>
-        <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
-          <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-
-  </div>
-
-
-  <!-- ════════ BOTTOM CTA ════════ -->
-  <div class="tours-cta t-reveal">
-    <p class="tours-cta-eyebrow">Be the First to Know</p>
-    <h3 class="tours-cta-heading">New trips drop every season.</h3>
-    <p class="tours-cta-sub">
-      We announce all upcoming expeditions to our waitlist first, with early-bird slots.
-      Get in touch to be notified before anyone else.
-    </p>
-    <a class="tours-cta-btn" href="Contact_Page.html">
-      <span>Get in Touch</span>
-      <svg viewBox="0 0 16 16" fill="none" width="11" height="11" aria-hidden="true">
-        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
-              stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
   </div>
 
 </main>
@@ -949,8 +1026,8 @@ a { color: inherit; text-decoration: none; }
     <nav class="footer-nav-row" aria-label="Footer navigation">
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
-      <a href="Tours_Page.html" class="active">Tours</a>
-      <a href="Contact_Page.html">Contact Us</a>
+      <a href="Tours_Page.html">Tours</a>
+      <a href="Contact_Page.html" class="active">Contact Us</a>
     </nav>
 
     <div class="footer-info-row">
@@ -1000,44 +1077,12 @@ a { color: inherit; text-decoration: none; }
 
 
 <!-- ══════════════════════════════════════════════
-     COMING SOON MODAL
-══════════════════════════════════════════════ -->
-<div id="cs-modal" role="dialog" aria-modal="true" aria-labelledby="cs-name"
-     onclick="if(event.target===this) closeModal()">
-  <div class="cs-box">
-    <button class="cs-close" onclick="closeModal()" aria-label="Close">✕</button>
-    <img class="cs-logo" src="assets/images/WildFellas_logo.png" alt="WildFellas"/>
-    <div class="cs-divider" aria-hidden="true"></div>
-    <p class="cs-tag">Coming Soon</p>
-    <h3 class="cs-name" id="cs-name">—</h3>
-    <p class="cs-desc">We're putting together something extraordinary for this destination. Check back soon, or get in touch to be notified when it's live.</p>
-    <div class="cs-sep" aria-hidden="true"></div>
-    <a class="cs-link" href="Contact_Page.html">
-      Notify Me
-      <svg viewBox="0 0 16 16" fill="none" width="10" height="10" aria-hidden="true">
-        <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5"
-              stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════
      SCRIPTS
 ══════════════════════════════════════════════ -->
 <script>
-/* ── Hero image loaded → trigger scale-in animation ── */
-const heroImgEl = document.getElementById('hero-img');
-const heroEl     = document.getElementById('tours-hero');
-if (heroImgEl) {
-  if (heroImgEl.complete) heroEl.classList.add('loaded');
-  else heroImgEl.addEventListener('load', () => heroEl.classList.add('loaded'));
-}
-
-/* ── Scroll: progress bar + navbar glass ── */
-const navEl      = document.getElementById('wf-nav');
+/* ── Scroll: progress bar ── */
 const progressEl = document.getElementById('wf-progress');
+const navEl = document.getElementById('wf-nav');
 let ticking = false;
 window.addEventListener('scroll', () => {
   if (!ticking) {
@@ -1045,7 +1090,7 @@ window.addEventListener('scroll', () => {
       const sy   = window.scrollY;
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       const pct  = docH > 0 ? (sy / docH) * 100 : 0;
-      navEl.classList.toggle('scrolled', sy > 60);
+      navEl.classList.toggle('scrolled', sy > 40);
       progressEl.style.width = pct + '%';
       progressEl.classList.toggle('visible', sy > 100);
       ticking = false;
@@ -1054,8 +1099,8 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-/* ── Intersection observer: scroll reveal ── */
-const revealEls = document.querySelectorAll('.t-reveal');
+/* ── Scroll reveal ── */
+const revealEls = document.querySelectorAll('.c-reveal');
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1063,62 +1108,111 @@ const revealObs = new IntersectionObserver((entries) => {
       revealObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 revealEls.forEach(el => revealObs.observe(el));
 
-/* ── Hero filter tabs ── */
-function filterSection(name, btn) {
-  document.querySelectorAll('.hero-tab').forEach(t => {
-    t.classList.remove('active');
-    t.setAttribute('aria-selected', 'false');
+/* ── Interest chips → write to hidden input ── */
+const interestInput = document.getElementById('f-interest');
+document.querySelectorAll('.interest-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('selected');
+    const selected = [...document.querySelectorAll('.interest-chip.selected')]
+                       .map(c => c.dataset.value).join(', ');
+    interestInput.value = selected;
   });
-  btn.classList.add('active');
-  btn.setAttribute('aria-selected', 'true');
-
-  const allSections = document.querySelectorAll('[data-section]');
-  const allSeps     = document.querySelectorAll('.section-sep');
-
-  if (name === 'all') {
-    allSections.forEach(el => { el.style.display = ''; fadeIn(el); });
-    allSeps.forEach(el => el.style.display = '');
-  } else {
-    allSections.forEach(el => { el.style.display = 'none'; el.style.opacity = '0'; });
-    allSeps.forEach(el => el.style.display = 'none');
-    const target = document.getElementById(name + '-section');
-    if (target) { target.style.display = ''; fadeIn(target); }
-  }
-  document.getElementById('tours-main').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-function fadeIn(el) {
-  el.style.opacity = '0';
-  el.style.transition = 'opacity 0.45s ease';
-  requestAnimationFrame(() => requestAnimationFrame(() => { el.style.opacity = '1'; }));
-}
-
-/* ── Coming soon modal ── */
-function openModal(name) {
-  document.getElementById('cs-name').textContent = name;
-  document.getElementById('cs-modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal() {
-  document.getElementById('cs-modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
 });
 
-/* ── Keyboard accessibility for cards ── */
-document.querySelectorAll('.dest-card[tabindex="0"]').forEach(card => {
-  card.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+/* ── Form → Web3Forms (works on GitHub Pages, no server needed) ── */
+const form       = document.getElementById('inquiry-form');
+const submitBtn  = document.getElementById('form-submit');
+const submitLbl  = document.getElementById('submit-label');
+const submitIcon = document.getElementById('submit-icon');
+
+function showToast(ok) {
+  const toast = document.createElement('div');
+  toast.textContent = ok
+    ? '✓  Inquiry sent — we\'ll be in touch soon!'
+    : '✗  Something went wrong. Please try again.';
+  Object.assign(toast.style, {
+    position:      'fixed',
+    bottom:        'max(28px, calc(28px + env(safe-area-inset-bottom)))',
+    left:          '50%',
+    transform:     'translateX(-50%) translateY(12px)',
+    background:    ok ? 'rgba(13,13,10,.96)' : 'rgba(30,10,10,.96)',
+    border:        ok ? '1px solid rgba(212,184,150,.45)' : '1px solid rgba(200,80,80,.4)',
+    color:         ok ? '#D4B896' : 'rgba(245,160,140,0.9)',
+    fontFamily:    'Neuzon, sans-serif',
+    fontSize:      '12px',
+    letterSpacing: '.14em',
+    padding:       '12px 28px',
+    zIndex:        '9999',
+    whiteSpace:    'nowrap',
+    opacity:       '0',
+    transition:    'opacity .4s ease, transform .4s ease',
+    backdropFilter:'blur(12px)',
   });
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    toast.style.opacity   = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+  }));
+  setTimeout(() => {
+    toast.style.opacity   = '0';
+    toast.style.transform = 'translateX(-50%) translateY(8px)';
+    setTimeout(() => toast.remove(), 500);
+  }, 4500);
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  /* Basic client-side validation */
+  const name    = form.querySelector('#f-name').value.trim();
+  const email   = form.querySelector('#f-email').value.trim();
+  const message = form.querySelector('#f-message').value.trim();
+  if (!name || !email || !message) {
+    showToast(false); return;
+  }
+
+  /* Loading state */
+  submitBtn.disabled  = true;
+  submitLbl.textContent = 'Sending…';
+  submitIcon.style.opacity = '0';
+
+  try {
+    const data = new FormData(form);
+    const res  = await fetch('https://api.web3forms.com/submit', {
+      method:  'POST',
+      headers: { 'Accept': 'application/json' },
+      body:    data,
+    });
+    const json = await res.json();
+
+    if (res.ok && json.success) {
+      showToast(true);
+      form.reset();
+      document.querySelectorAll('.interest-chip').forEach(c => c.classList.remove('selected'));
+      document.getElementById('f-interest').value = '';
+      submitBtn.classList.add('sent');
+      submitLbl.textContent = 'Sent ✓';
+    } else {
+      showToast(false);
+      submitLbl.textContent = 'Send Inquiry';
+      submitIcon.style.opacity = '1';
+      submitBtn.disabled = false;
+    }
+  } catch (err) {
+    showToast(false);
+    submitLbl.textContent = 'Send Inquiry';
+    submitIcon.style.opacity = '1';
+    submitBtn.disabled = false;
+  }
 });
 
 /* ── Mobile menu ── */
 const menuEl   = document.getElementById('wf-mobile-menu');
 const burgerEl = document.getElementById('wf-hamburger');
+
 function toggleMobileMenu() {
   const open = !menuEl.classList.contains('open');
   menuEl.classList.toggle('open', open);
@@ -1127,6 +1221,7 @@ function toggleMobileMenu() {
   menuEl.setAttribute('aria-hidden', String(!open));
   document.body.style.overflow = open ? 'hidden' : '';
 }
+
 menuEl.querySelectorAll('.wf-mobile-link, .wf-mobile-cta').forEach(l => {
   l.addEventListener('click', () => {
     menuEl.classList.remove('open');
@@ -1136,14 +1231,18 @@ menuEl.querySelectorAll('.wf-mobile-link, .wf-mobile-cta').forEach(l => {
     document.body.style.overflow = '';
   });
 });
+
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && menuEl.classList.contains('open')) {
     toggleMobileMenu(); burgerEl.focus();
   }
 });
+
 window.addEventListener('resize', () => {
   if (window.innerWidth > 900 && menuEl.classList.contains('open')) toggleMobileMenu();
 }, { passive: true });
+
+
 </script>
 
 </body>
