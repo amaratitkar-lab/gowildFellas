@@ -144,54 +144,60 @@ a { color: inherit; text-decoration: none; }
 
 /* Mobile drawer */
 #wf-mobile-menu {
-  position: fixed; inset: 0; z-index: 99;
-  background: var(--bg);
-  display: flex; flex-direction: column;
-  padding: calc(var(--nav-h) + var(--safe-t) + 32px) clamp(28px,6vw,56px) max(28px, var(--safe-b));
-  opacity: 0; pointer-events: none;
-  transition: opacity .4s var(--ease-out);
+  position: fixed; inset: 0; z-index: 98;
+  background: rgba(10,9,7,.99);
+  backdrop-filter: blur(32px) saturate(150%); -webkit-backdrop-filter: blur(32px) saturate(150%);
+  display: flex; flex-direction: column; justify-content: center;
+  padding:
+    calc(var(--nav-h) + var(--safe-t) + 40px)
+    max(40px, calc(40px + var(--safe-r)))
+    max(40px, calc(40px + var(--safe-b)))
+    max(40px, calc(40px + var(--safe-l)));
+  pointer-events: none; opacity: 0; transition: opacity .45s var(--ease-out);
 }
 #wf-mobile-menu.open { pointer-events: all; opacity: 1; }
-.wf-mobile-nav { display: flex; flex-direction: column; gap: 4px; }
+.wf-mobile-nav { display: flex; flex-direction: column; }
 .wf-mobile-link {
-  font-size: clamp(28px,7vw,40px); letter-spacing: -.01em;
-  color: var(--cream); padding: 14px 0;
-  border-bottom: 1px solid var(--gold-08);
-  opacity: 0; transform: translateY(16px);
-  transition: opacity .45s var(--ease-out), transform .45s var(--ease-out), color .3s;
+  font-size: clamp(30px, 8.5vw, 54px); letter-spacing: .04em; color: rgba(212,184,150,.2);
+  padding: 13px 0; border-bottom: 1px solid rgba(212,184,150,.06);
+  display: flex; align-items: center; justify-content: space-between;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateY(22px); opacity: 0;
+  transition: color .3s, transform .55s var(--ease-out), opacity .55s var(--ease-out);
 }
-#wf-mobile-menu.open .wf-mobile-link              { transform: translateY(0); opacity: 1; }
+#wf-mobile-menu.open .wf-mobile-link { transform: translateY(0); opacity: 1; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(1) { transition-delay: .07s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(2) { transition-delay: .13s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(3) { transition-delay: .19s; }
 #wf-mobile-menu.open .wf-mobile-link:nth-child(4) { transition-delay: .25s; }
-.wf-mobile-link.active { color: var(--gold); }
+.wf-mobile-link:hover, .wf-mobile-link.active { color: var(--gold); }
 .wf-mobile-cta-wrap {
-  margin-top: 32px;
-  opacity: 0; transform: translateY(16px);
-  transition: opacity .45s var(--ease-out) .3s, transform .45s var(--ease-out) .3s;
+  margin-top: 36px; transform: translateY(20px); opacity: 0;
+  transition: transform .55s var(--ease-out) .31s, opacity .55s var(--ease-out) .31s;
 }
 #wf-mobile-menu.open .wf-mobile-cta-wrap { transform: translateY(0); opacity: 1; }
 .wf-mobile-cta {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 13px; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--ink); background: var(--gold);
-  padding: 16px 28px; width: 100%; justify-content: center;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); padding: 14px 28px; border: 1px solid rgba(212,184,150,.3);
+  transition: background .3s, border-color .3s; -webkit-tap-highlight-color: transparent;
 }
+.wf-mobile-cta:active { background: var(--gold-06); }
 .wf-mobile-footer {
-  margin-top: auto; display: flex; align-items: center; justify-content: space-between;
-  opacity: 0; transition: opacity .4s ease .4s;
+  position: absolute;
+  bottom: max(28px, calc(28px + var(--safe-b)));
+  left:  max(40px, calc(40px + var(--safe-l)));
+  right: max(40px, calc(40px + var(--safe-r)));
+  display: flex; align-items: center; justify-content: space-between;
+  opacity: 0; transition: opacity .55s var(--ease-out) .37s;
 }
 #wf-mobile-menu.open .wf-mobile-footer { opacity: 1; }
-.wf-mobile-footer-text {
-  font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(245,237,224,.3);
-}
+.wf-mobile-footer-text { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: rgba(212,184,150,.18); }
 .wf-mobile-social-link {
   display: inline-flex; align-items: center; justify-content: center;
   width: 40px; height: 40px; margin: -10px;
   border: 1px solid rgba(212,184,150,.25); border-radius: 50%;
-  color: rgba(245,237,224,.55);
+  color: rgba(212,184,150,.55);
   transition: color .3s var(--ease-out), border-color .3s var(--ease-out), transform .3s var(--ease-out);
   -webkit-tap-highlight-color: transparent;
 }
@@ -646,6 +652,15 @@ a { color: inherit; text-decoration: none; }
    RESPONSIVE
 ═══════════════════════════════════════════════ */
 @media (max-width: 900px) {
+  :root { --nav-h: 68px; }
+  #wf-nav {
+    padding-left:  max(24px, calc(24px + var(--safe-l)));
+    padding-right: max(24px, calc(24px + var(--safe-r)));
+  }
+  .wf-nav-desktop, .wf-nav-right { display: none !important; }
+  .wf-hamburger { display: flex; }
+  .wf-logo img { height: 38px; }
+
   .tours-hero { min-height: auto; }
   .hero-left { padding: clamp(36px,6vh,56px) clamp(24px,5vw,48px); }
   .dest-grid { grid-template-columns: repeat(2, 1fr); }
@@ -671,9 +686,10 @@ a { color: inherit; text-decoration: none; }
   .birding-soon-card { flex-direction: column; align-items: flex-start; }
   .birding-soon-cta { width: 100%; justify-content: center; }
 }
-@media (max-width: 700px) {
-  .wf-nav-desktop, .wf-nav-divider, .wf-nav-cta { display: none; }
-  .wf-hamburger { display: flex; }
+@media (max-width: 374px) {
+  :root { --nav-h: 58px; }
+  .wf-logo img { height: 28px; }
+  .wf-mobile-link { font-size: clamp(26px, 9vw, 38px); }
 }
 @media (min-width: 901px) { #wf-mobile-menu { display: none !important; } }
 
@@ -962,7 +978,7 @@ a { color: inherit; text-decoration: none; }
         </svg>
         <span>hey@gowildfellas.com</span>
       </a>
-      <a href="tel:+919970004812">
+      <a href="tel:+918855940100">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
              stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.1 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/>
