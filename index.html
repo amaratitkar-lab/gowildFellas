@@ -209,8 +209,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .wf-mobile-social-link {
   display: inline-flex; align-items: center; justify-content: center;
   width: 40px; height: 40px; margin: -10px;
-  color: rgba(212,184,150,.32);
-  transition: color .3s var(--ease-out), transform .3s var(--ease-out);
+  border: 1px solid rgba(212,184,150,.25); border-radius: 50%;
+  color: rgba(212,184,150,.55);
+  transition: color .3s var(--ease-out), border-color .3s var(--ease-out), transform .3s var(--ease-out);
   -webkit-tap-highlight-color: transparent;
 }
 .wf-mobile-social-link svg { position: relative; z-index: 1; display: block; }
